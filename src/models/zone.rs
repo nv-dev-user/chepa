@@ -1,7 +1,7 @@
 use super::entity::Entity;
 use super::directions::Directions;
 
-struct Zone {
+pub struct Zone {
     entity: Entity,
     baseLevel: i32,
     spawnRate: u8,
