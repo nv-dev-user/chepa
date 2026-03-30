@@ -3,15 +3,15 @@ use super::directions::Directions;
 
 pub struct Zone {
     entity: Entity,
-    baseLevel: i32,
-    spawnRate: u8,
-    spawnGroup: i32,
+    base_level: i32,
+    spawn_rate: u8,
+    spawn_group: i32,
     directions: Directions,
 }
 
 impl Zone {
-    pub fn new(entity: Entity, baseLevel: i32, spawnRate: u8, spawnGroup: i32, directions: Directions) -> Self {
-        Zone { entity, baseLevel, spawnRate, spawnGroup, directions }
+    pub fn new(entity: Entity, base_level: i32, spawn_rate: u8, spawn_group: i32, directions: Directions) -> Self {
+        Zone { entity, base_level, spawn_rate, spawn_group, directions }
     }
 
     pub fn get_entity(&self) -> &Entity {
@@ -19,15 +19,15 @@ impl Zone {
     }
 
     pub fn get_base_level(&self) -> i32 {
-        self.baseLevel
+        self.base_level
     }
 
     pub fn get_spawn_rate(&self) -> u8 {
-        self.spawnRate
+        self.spawn_rate
     }
 
     pub fn get_spawn_group(&self) -> i32 {
-        self.spawnGroup
+        self.spawn_group
     }
 
     pub fn get_z(&self) -> i32 {
