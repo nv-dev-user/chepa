@@ -1,4 +1,4 @@
-## MODELS
+## MODELS
 
 - Entity
 - Zone
@@ -10,12 +10,12 @@
 - PNJ
 - Metadata
 
-## SERVICES
+## SERVICES
 
 - JsonParser
 
 
-## ROLES
+## ROLES
 
 - M -> Metadata, JsonParser
 - N -> Zone, PNJ
