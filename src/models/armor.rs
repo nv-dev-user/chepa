@@ -1,6 +1,6 @@
 use super::entity::Entity;
 
-struct Armor {
+pub struct Armor {
     entity: Entity,
     coef_def: u32,
 }
