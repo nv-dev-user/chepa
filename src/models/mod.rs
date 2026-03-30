@@ -7,3 +7,4 @@ pub mod mob;
 pub mod pnj;
 pub mod armor;
 pub mod player;
+pub mod metadata;
