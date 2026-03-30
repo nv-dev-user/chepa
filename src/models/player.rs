@@ -1,3 +1,8 @@
+use super::armor::Armor;
+use super::entity::Entity;
+use super::zone::Zone;
+use super::weapon::Weapon;
+
 pub struct Player {
     entity: Entity,
     zone: Zone,
