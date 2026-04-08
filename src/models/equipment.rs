@@ -21,4 +21,8 @@ impl Equipment {
     pub fn get_name(&self) -> &str {
         self.item.get_name()
     }
+    
+    pub fn get_coef_modifier(&self) -> u32 {
+        self.coef_modifier
+    }
 }
