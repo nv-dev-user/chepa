@@ -24,7 +24,11 @@
     - NPC
     - Player
 
+- Implémentation des logiques de calculs (drop items, gain exp, etc...)
+
+
+### Les autres
+
 - M -> Metadata, JsonParser
 - N -> Zone, PNJ
-- P -> Mob, Weapon
 - T -> Item, Armor
