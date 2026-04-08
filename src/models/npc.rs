@@ -2,19 +2,19 @@ use super::item::Item;
 use std::collections::HashMap;
 use super::living_entity::LivingEntity;
 
-pub struct PNJ {
+pub struct NPC {
     living_entity: LivingEntity,
     dialogs: Vec<String>,
     droppable_items_percentage : HashMap<Item, f32>,
 }
 
-impl PNJ {
+impl NPC {
     pub fn new(
         living_entity: LivingEntity, 
         dialogs: Vec<String>, 
         droppable_items_percentage: HashMap<Item, f32>
     ) -> Self {
-        PNJ { 
+        NPC { 
             living_entity, 
             dialogs, 
             droppable_items_percentage }

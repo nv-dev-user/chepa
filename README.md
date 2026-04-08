@@ -21,7 +21,7 @@
 
 - Réalisation des models :  
     - Living entity
-    - PNJ
+    - NPC
     - Player
 
 - M -> Metadata, JsonParser

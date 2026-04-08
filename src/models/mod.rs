@@ -4,7 +4,7 @@ pub mod zone;
 pub mod directions;
 pub mod weapon;
 pub mod mob;
-pub mod pnj;
+pub mod npc;
 pub mod armor;
 pub mod player;
 pub mod metadata;
