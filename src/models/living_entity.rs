@@ -75,4 +75,16 @@ impl LivingEntity {
     pub fn get_zone(&self) -> &Zone {
         &self.zone
     }
+
+    pub fn set_weapon(&mut self, weapon: Weapon) {
+        self.weapon = Some(weapon);
+    }
+
+    pub fn set_armor(&mut self, armor: Armor) {
+        self.armor = Some(armor);
+    }
+
+    pub fn set_zone(&mut self, zone: Zone) {
+        self.zone = zone;
+    }
 }
