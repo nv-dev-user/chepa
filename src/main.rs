@@ -43,5 +43,6 @@ fn main() {
     loop {
         game.update();
         game.render();
+        std::thread::sleep(std::time::Duration::from_millis(16));
     }
 }
