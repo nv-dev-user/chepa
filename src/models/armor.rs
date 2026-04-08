@@ -1,16 +1,16 @@
 use super::equipment::Equipment;
 
-pub struct Weapon {
+pub struct Armor {
     equipment: Equipment,
 }
 
-impl Weapon {
+impl Armor {
     pub fn new(id: u32, name: String, coef_modifier: u32) -> Self {
-        Weapon { equipment: Equipment::new(id, name, coef_modifier) }
+        Armor { equipment: Equipment::new(id, name, coef_modifier) }
     }
 
     pub fn new_from_equipment(equipment: Equipment) -> Self {
-        Weapon { equipment }
+        Armor { equipment }
     }
 
     pub fn get_id(&self) -> u32 {
