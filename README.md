@@ -17,6 +17,13 @@
 
 ## ROLES
 
+### Paul
+
+- Réalisation des models :  
+    - Living entity
+    - PNJ
+    - Player
+
 - M -> Metadata, JsonParser
 - N -> Zone, PNJ
 - P -> Mob, Weapon

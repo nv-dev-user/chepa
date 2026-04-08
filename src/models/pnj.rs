@@ -1,41 +1,34 @@
-use super::entity::Entity;
-use super::zone::Zone;
 use super::item::Item;
+use std::collections::HashMap;
+use super::living_entity::LivingEntity;
 
 pub struct PNJ {
-    entity: Entity,
-    zone: Zone,
-    drop: Vec<Item>,
+    living_entity: LivingEntity,
     dialogs: Vec<String>,
-    has_dropped: bool,
+    droppable_items_percentage : HashMap<Item, f32>,
 }
 
 impl PNJ {
-    pub fn new(entity: Entity, zone: Zone, drop: Vec<Item>, dialogs: Vec<String>) -> Self {
-        PNJ { entity, zone, drop, dialogs, has_dropped: false }
+    pub fn new(
+        living_entity: LivingEntity, 
+        dialogs: Vec<String>, 
+        droppable_items_percentage: HashMap<Item, f32>
+    ) -> Self {
+        PNJ { 
+            living_entity, 
+            dialogs, 
+            droppable_items_percentage }
     }
 
-    pub fn get_entity(&self) -> &Entity {
-        &self.entity
-    }
-
-    pub fn get_zone(&self) -> &Zone {
-        &self.zone
-    }
-
-    pub fn get_drop(&self) -> &Vec<Item> {
-        &self.drop
+    pub fn get_living_entity(&self) -> &LivingEntity {
+        &self.living_entity
     }
 
     pub fn get_dialogs(&self) -> &Vec<String> {
         &self.dialogs
     }
 
-    pub fn has_dropped(&self) -> bool {
-        self.has_dropped
-    }
-
-    pub fn set_has_dropped(&mut self, value: bool) {
-        self.has_dropped = value;
+    pub fn get_droppable_items_percentage(&self) -> &HashMap<Item, f32> {
+        &self.droppable_items_percentage
     }
 }
