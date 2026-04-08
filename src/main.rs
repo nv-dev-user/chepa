@@ -14,6 +14,9 @@ struct Game {
 
 impl Game {
     pub fn new() -> Self {
+        // Get metadata from JSON file
+        // Get entities form JSON files
+
         Game {
             weapons: Vec::new(),
             zones: Vec::new(),
