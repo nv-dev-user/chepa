@@ -4,7 +4,7 @@ pub struct Zone {
     entity: Entity,
     base_level: u32,
     spawn_rate: u8,
-    spawn_group_id: u32,
+    spawn_group_id: Option<u32>,
     north_zone_id: Option<u32>,
     south_zone_id: Option<u32>,
     east_zone_id: Option<u32>,
@@ -16,7 +16,7 @@ impl Zone {
         entity: Entity,
         base_level: u32,
         spawn_rate: u8,
-        spawn_group_id: u32,
+        spawn_group_id: Option<u32>,
         north_zone_id: Option<u32>,
         south_zone_id: Option<u32>,
         east_zone_id: Option<u32>,
@@ -46,7 +46,7 @@ impl Zone {
         self.spawn_rate
     }
 
-    pub fn get_spawn_group_id(&self) -> u32 {
+    pub fn get_spawn_group_id(&self) -> Option<u32> {
         self.spawn_group_id
     }
 
