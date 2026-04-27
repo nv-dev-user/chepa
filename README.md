@@ -19,12 +19,21 @@
 
 ### Paul
 
-- Réalisation des models :  
+- Réalisation des models :
     - Living entity
     - NPC
     - Player
+    - Weapon
+    - Mob (ensuite transformé en LivingEntity et NPC)
+
+### Nicolas
+- Réalisation des models :
+    - Zone
+    - PNJ (ensuite transformé en LivingEntity et NPC par Paul)
+- Réalisation des controllers :
+    - LivingEntityController
+
+
 
 - M -> Metadata, JsonParser
-- N -> Zone, PNJ
-- P -> Mob, Weapon
 - T -> Item, Armor

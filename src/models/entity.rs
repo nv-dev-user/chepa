@@ -1,3 +1,6 @@
+
+
+#[derive(Debug, Clone)]
 pub struct Entity {
     id: u32,
     name: String,

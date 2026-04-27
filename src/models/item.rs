@@ -1,5 +1,6 @@
 use super::entity::Entity;
 
+#[derive(Debug, Clone)]
 pub struct Item {
     entity: Entity,
 }

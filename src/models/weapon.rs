@@ -1,5 +1,6 @@
 use super::equipment::Equipment;
 
+#[derive(Debug, Clone)]
 pub struct Weapon {
     equipment: Equipment,
 }
