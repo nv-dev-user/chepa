@@ -1,4 +1,7 @@
+use crate::models::living_entity::LivingEntityCombat;
+
 use super::living_entity::LivingEntity;
+use super::npc::NPC;
 
 pub struct Player {
     living_entity: LivingEntity,
@@ -20,6 +23,14 @@ impl Player {
         &self.living_entity
     }
 
+    pub fn get_mut_living_entity(&mut self) -> &mut LivingEntity {
+        &mut self.living_entity
+    }
+
+    pub fn get_coef_exp(&self) -> f32 {
+        self.coef_exp
+    }
+  
     pub fn get_xp_total(&self) -> u64 {
         self.xp_total
     }
@@ -52,6 +63,27 @@ impl Player {
         let next_level = self.get_level().saturating_add(1);
         let next_required = Self::xp_required_for_level(next_level);
         next_required.saturating_sub(self.xp_total)
+    }
+  
+    // TODO : mettre là où ça doit aller
+    pub fn fight(&mut self, target: &mut NPC) {
+        while self.is_alive() && target.is_alive() {
+            self.attack(target.get_mut_living_entity());
+
+            if !target.is_alive() {
+                // TODO: add xp to player
+                // TODO: add items to player
+                break;
+            }
+
+            target.attack(self.get_mut_living_entity());
+
+            if !self.is_alive() {
+                // TODO: remove items from player
+                // TODO: respawn
+                break;
+            }
+        }
     }
 }
 
@@ -125,5 +157,19 @@ mod tests {
         // level 2 => next level threshold is 900
         assert_eq!(p.get_level(), 2);
         assert_eq!(p.xp_to_next_level(), 450);
+    }
+}
+
+impl LivingEntityCombat for Player {
+    fn attack(&self, target: &mut LivingEntity) {
+        self.living_entity.attack(target);
+    }
+
+    fn take_damage(&mut self, damage: u32) {
+        self.living_entity.take_damage(damage);
+    }
+
+    fn is_alive(&self) -> bool {
+        self.living_entity.is_alive()
     }
 }
