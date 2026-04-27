@@ -95,6 +95,10 @@ impl LivingEntity {
     pub fn set_zone(&mut self, zone: Zone) {
         self.zone = zone;
     }
+
+    pub fn set_come_from(&mut self, come_from: Zone) {
+        self.come_from = come_from;
+    }
 }
 
 pub trait LivingEntityCombat {
@@ -129,10 +133,6 @@ impl LivingEntityCombat for LivingEntity {
     fn is_alive(&self) -> bool {
         self.base_hp > 0
     }
-  
-    fn set_come_from(&mut self, come_from: Zone) {
-        self.come_from = come_from;
-    }
 }
 
 #[cfg(test)]
@@ -146,7 +146,7 @@ mod tests {
         let armor = Armor::new(1, "test".to_string(), 1);
         let zone_entity = Entity::new(1, "test".to_string());
         let zone = Zone::new(zone_entity, 1, 1, Some(1), Some(1), Some(1), Some(1), Some(1));
-        let living_entity = LivingEntity::new(entity, 1, 1, 1, 1, 1, Some(weapon), Some(armor), zone);
+        let living_entity = LivingEntity::new(entity, 1, 1, 1, 1, 1, Some(weapon), Some(armor), zone.clone(), zone.clone());
         assert_eq!(living_entity.get_entity().get_id(), 1);
         assert_eq!(living_entity.get_entity().get_name(), "test");
         assert_eq!(living_entity.get_base_hp(), 1);
@@ -167,14 +167,14 @@ mod tests {
         let armor = Armor::new(1, "test".to_string(), 1);
         let zone_entity = Entity::new(1, "test".to_string());
         let zone = Zone::new(zone_entity, 1, 1, Some(1), Some(1), Some(1), Some(1), Some(1));
-        let living_entity = LivingEntity::new(entity, 1, 1, 1, 1, 1, Some(weapon), Some(armor), zone);
+        let living_entity = LivingEntity::new(entity, 1, 1, 1, 1, 1, Some(weapon), Some(armor), zone.clone(), zone.clone());
         
         let target_entity = Entity::new(2, "target".to_string());
         let target_weapon = Weapon::new(2, "target".to_string(), 1);
         let target_armor = Armor::new(2, "target".to_string(), 1);
         let target_zone_entity = Entity::new(1, "test".to_string());
         let target_zone = Zone::new(target_zone_entity, 1, 1, Some(1), Some(1), Some(1), Some(1), Some(1));
-        let mut target = LivingEntity::new(target_entity, 1, 1, 1, 1, 1, Some(target_weapon), Some(target_armor), target_zone);
+        let mut target = LivingEntity::new(target_entity, 1, 1, 1, 1, 1, Some(target_weapon), Some(target_armor), target_zone.clone(), target_zone.clone());
         
         living_entity.attack(&mut target);
         assert_eq!(target.get_base_hp(), 0);
@@ -187,7 +187,7 @@ mod tests {
         let armor = Armor::new(1, "test".to_string(), 1);
         let zone_entity = Entity::new(1, "test".to_string());
         let zone = Zone::new(zone_entity, 1, 1, Some(1), Some(1), Some(1), Some(1), Some(1));
-        let mut living_entity = LivingEntity::new(entity, 1, 1, 1, 1, 1, Some(weapon), Some(armor), zone);
+        let mut living_entity = LivingEntity::new(entity, 1, 1, 1, 1, 1, Some(weapon), Some(armor), zone.clone(), zone.clone());
         living_entity.take_damage(2);
         assert_eq!(living_entity.get_base_hp(), 0);
     }
@@ -199,7 +199,7 @@ mod tests {
         let armor = Armor::new(1, "test".to_string(), 1);
         let zone_entity = Entity::new(1, "test".to_string());
         let zone = Zone::new(zone_entity, 1, 1, Some(1), Some(1), Some(1), Some(1), Some(1));
-        let living_entity = LivingEntity::new(entity, 1, 1, 1, 1, 1, Some(weapon), Some(armor), zone);
+        let living_entity = LivingEntity::new(entity, 1, 1, 1, 1, 1, Some(weapon), Some(armor), zone.clone(), zone.clone());
         assert_eq!(living_entity.is_alive(), true);
     } 
 }

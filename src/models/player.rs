@@ -27,10 +27,6 @@ impl Player {
         &mut self.living_entity
     }
 
-    pub fn get_coef_exp(&self) -> f32 {
-        self.coef_exp
-    }
-  
     pub fn get_xp_total(&self) -> u64 {
         self.xp_total
     }
@@ -87,6 +83,20 @@ impl Player {
     }
 }
 
+impl LivingEntityCombat for Player {
+    fn attack(&self, target: &mut LivingEntity) {
+        self.living_entity.attack(target);
+    }
+
+    fn take_damage(&mut self, damage: u32) {
+        self.living_entity.take_damage(damage);
+    }
+
+    fn is_alive(&self) -> bool {
+        self.living_entity.is_alive()
+    }
+}
+
 
 #[cfg(test)]
 mod tests {
@@ -108,7 +118,7 @@ mod tests {
         )
     }
 
-    fn make_living_entity(id: u32, name: &str) -> LivingEntity {
+    pub fn make_living_entity(id: u32, name: &str) -> LivingEntity {
         LivingEntity::new(
             Entity::new(id, name.to_string()),
             100,
@@ -118,6 +128,7 @@ mod tests {
             50,
             None,
             None,
+            make_zone(),
             make_zone(),
         )
     }
@@ -157,19 +168,5 @@ mod tests {
         // level 2 => next level threshold is 900
         assert_eq!(p.get_level(), 2);
         assert_eq!(p.xp_to_next_level(), 450);
-    }
-}
-
-impl LivingEntityCombat for Player {
-    fn attack(&self, target: &mut LivingEntity) {
-        self.living_entity.attack(target);
-    }
-
-    fn take_damage(&mut self, damage: u32) {
-        self.living_entity.take_damage(damage);
-    }
-
-    fn is_alive(&self) -> bool {
-        self.living_entity.is_alive()
     }
 }

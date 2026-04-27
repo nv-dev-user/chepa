@@ -67,7 +67,8 @@ mod tests {
             base_xp,
             None,
             None,
-            make_zone(),
+            make_zone().clone(),
+            make_zone().clone(),
         )
     }
 
