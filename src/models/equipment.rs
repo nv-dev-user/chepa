@@ -1,5 +1,6 @@
 use super::item::Item;
 
+#[derive(Debug, Clone)]
 pub struct Equipment {
     item: Item,
     coef_modifier: u32,
