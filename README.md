@@ -35,5 +35,11 @@
 
 
 
+- Implémentation des logiques de calculs (drop items, gain exp, etc...)
+
+
+### Les autres
+
 - M -> Metadata, JsonParser
+- N -> Zone, PNJ
 - T -> Item, Armor
