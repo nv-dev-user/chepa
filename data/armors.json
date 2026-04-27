@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
     "armor":[
         {
@@ -12,3 +13,37 @@
         }
     ]
 }
+=======
+[
+  {
+    "id": 1,
+    "name": "Tunique usee",
+    "coef_modifier": 6
+  },
+  {
+    "id": 2,
+    "name": "Gilet en cuir",
+    "coef_modifier": 10
+  },
+  {
+    "id": 3,
+    "name": "Brigandine legere",
+    "coef_modifier": 14
+  },
+  {
+    "id": 4,
+    "name": "Cotte de mailles",
+    "coef_modifier": 18
+  },
+  {
+    "id": 5,
+    "name": "Harnois d'acier",
+    "coef_modifier": 23
+  },
+  {
+    "id": 6,
+    "name": "Armure gravee",
+    "coef_modifier": 28
+  }
+]
+>>>>>>> develop
