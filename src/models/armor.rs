@@ -1,6 +1,6 @@
 use super::equipment::Equipment;
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, serde::Deserialize)]
 pub struct Armor {
     equipment: Equipment,
 }

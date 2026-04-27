@@ -1,0 +1,14 @@
+{
+    "armor":[
+        {
+            "id": 1,
+            "name": "Cuirasse",
+            "coef_attack": 10
+        },
+        {
+            "id": 2,
+            "name": "T-Stirt",
+            "coef_attack": 1
+        }
+    ]
+}

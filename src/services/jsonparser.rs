@@ -3,19 +3,13 @@ use std::fs;
 use std::io;
 use std::path::PathBuf;
 
-use jsonparser;
-use serde_json::{Result, Value};
-use serde::{Deserialize, Serialize};
-
 use crate::models::zone::Zone;
-use crate::models::weapon::Weapon;
-
 
 /*
 * Recherche les fichiers de données dans le répertoire ./src/data
 * Retourne une liste de fichier JSON
 */
-fn search_datafiles() -> std::io::Result<Vec<PathBuf>> {
+pub fn search_datafiles() -> std::io::Result<Vec<PathBuf>> {
     let mut files = Vec::new();
     for entry in fs::read_dir("./data")? {
         let entry = entry?;
@@ -59,15 +53,10 @@ pub fn receive_data_from_file(path : &str) -> io::Result<String> {
 }
 
 pub fn load_zones(content : &str) -> io::Result<Vec<Zone>>{
-    let parsed_content: Vec<Zone> = serde_json::from_str(content)
+    let zones: Vec<Zone> = serde_json::from_str(content)
         .map_err(|e| io::Error::new(io::ErrorKind::InvalidData, e))?;
-    Ok(parsed_content)
-}
 
-pub fn load_weapons(content : &str) -> io::Result<Vec<Weapon>>{
-    let parsed_content: Vec<Weapon> = serde_json::from_str(content)
-        .map_err(|e| io::Error::new(io::ErrorKind::InvalidData, e))?;
-    Ok(parsed_content)
+    Ok(zones)
 }
 
 #[cfg(test)]
@@ -81,7 +70,54 @@ mod tests {
         let files = result.unwrap();
         assert!(!files.is_empty());
         for file in files {
+            println!("Fichier trouvé : {:?}", file);
             assert!(file.extension().unwrap() == "json");
         }
+    }
+
+    #[test]
+    fn test_receive_data_from_file() {
+        let result = receive_data_from_file("./data/zones.json");
+        assert!(result.is_ok());
+        let content = result.unwrap();
+        assert!(!content.is_empty());
+        println!("Contenu du fichier : {}", content);
+    }
+
+    #[test]
+    fn test_load_zones() {
+        let content = r#"
+        [
+            {
+                "entity": {
+                    "id": 1,
+                    "name": "Zone 1"
+                },
+                "base_level": 1,
+                "spawn_rate": 10,
+                "spawn_group_id": null,
+                "north_zone_id": 2,
+                "east_zone_id": null,
+                "south_zone_id": null,
+                "west_zone_id": null
+            },
+            {
+                "entity": {
+                    "id": 2,
+                    "name": "Zone 2"
+                },
+                "base_level": 1,
+                "spawn_rate": 10,
+                "spawn_group_id": null,
+                "north_zone_id": null,
+                "east_zone_id": null,
+                "south_zone_id": null,
+                "west_zone_id": 1
+            }
+        ]
+        "#;
+
+        let result = load_zones(content);
+        print!("Zones chargées : {:?}", result);
     }
 }
