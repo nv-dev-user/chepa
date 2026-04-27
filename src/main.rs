@@ -1,3 +1,5 @@
+use chepa::services::renderer::render_player_position;
+
 use chepa::models::armor::Armor;
 use chepa::models::weapon::Weapon;
 use chepa::models::zone::Zone;
@@ -7,7 +9,6 @@ use chepa::models::player::Player;
 mod services;
 mod models;
 
-use services::jsonparser::receive_data_from_file;
 use services::jsonparser::load_zones;
 
 struct Game {
@@ -15,7 +16,7 @@ struct Game {
     zones: Vec<Zone>,
     armors: Vec<Armor>,
     npcs: Vec<NPC>,
-    players: Vec<Player>,
+    player: Player,
 }
 
 impl Game {
@@ -39,18 +40,16 @@ impl Game {
             zones: Vec::new(),
             armors: Vec::new(),
             npcs: Vec::new(),
-            players: Vec::new(),
+            player: Player::new(),
         }
     }
 
     pub fn update(&mut self) {
-        println!("Updating game state...");
-        // Here you can add code to update the game logic, handle user input, etc.
+
     }
 
     pub fn render(&self) {
-        println!("Rendering game...");
-        // Here you can add code to draw the game world, UI, etc.
+        render_player_position(&self.player.get_living_entity(), &self.zones);
     }
 }
 

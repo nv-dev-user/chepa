@@ -2,7 +2,6 @@ pub mod entity;
 pub mod item;
 pub mod zone;
 pub mod weapon;
-pub mod mob;
 pub mod npc;
 pub mod armor;
 pub mod player;

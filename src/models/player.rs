@@ -7,12 +7,12 @@ pub struct Player {
 
 impl Player {
     pub fn new(
-        living_entity: LivingEntity, 
+        living_entity: LivingEntity,
         coef_exp: f32
     ) -> Self {
-        Player { 
-            living_entity, 
-            coef_exp 
+        Player {
+            living_entity,
+            coef_exp
         }
     }
 

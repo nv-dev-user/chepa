@@ -17,7 +17,7 @@ use crate::models::weapon::Weapon;
 */
 fn search_datafiles() -> std::io::Result<Vec<PathBuf>> {
     let mut files = Vec::new();
-    for entry in fs::read_dir("./src/data")? {
+    for entry in fs::read_dir("./data")? {
         let entry = entry?;
         let path = entry.path();
 
@@ -41,10 +41,13 @@ fn search_datafiles() -> std::io::Result<Vec<PathBuf>> {
     }
 }
 
+/*
+ * Lit le contenu d'un fichier JSON et le retourne sous forme de String
+ */
 pub fn receive_data_from_file(path : &str) -> io::Result<String> {
-    let jsonContent = fs::read_to_string(path)?;
+    let json_content = fs::read_to_string(path)?;
 
-    if jsonContent.is_empty() {
+    if json_content.is_empty() {
         return Err(
             io::Error::new(
                 io::ErrorKind::NotFound,
@@ -52,55 +55,33 @@ pub fn receive_data_from_file(path : &str) -> io::Result<String> {
             )
         );
     }
-    Ok(jsonContent)
+    Ok(json_content)
 }
 
 pub fn load_zones(content : &str) -> io::Result<Vec<Zone>>{
-    let parsedContent: Vec<Zone> = serde_json::from_str(content)
+    let parsed_content: Vec<Zone> = serde_json::from_str(content)
         .map_err(|e| io::Error::new(io::ErrorKind::InvalidData, e))?;
-    Ok(parsedContent)
+    Ok(parsed_content)
 }
 
 pub fn load_weapons(content : &str) -> io::Result<Vec<Weapon>>{
-    let parsedContent: Vec<Weapon> = serde_json::from_str(content)
+    let parsed_content: Vec<Weapon> = serde_json::from_str(content)
         .map_err(|e| io::Error::new(io::ErrorKind::InvalidData, e))?;
-    Ok(parsedContent)
+    Ok(parsed_content)
 }
 
-/*
-* CA MARCHE PAS -> askip jsonparser c'est nul
-* C'est sensé concaténer les fichiers JSON
-*/
-// pub fn initialize_data() -> std::io::Result<()> {
-//     let files = search_datafiles();
+#[cfg(test)]
+mod tests {
+    use super::*;
 
-//     let mut merged = JSONValue::Object(Default::default());
-
-//     for file in files {
-//         println!("Traitement : {:?}", file);
-
-//         let content = match read_file_to_string(&file) {
-//             Ok(c) => c,
-//             Err(e) => {
-//                 eprintln!("Erreur lecture {} : {:?}", file.display(), e);
-//                 continue;
-//             }
-//         };
-
-//         let json_val = match parse_json_string(&content) {
-//             Ok(v) => v,
-//             Err(e) => {
-//                 eprintln!("Erreur parse JSON dans {} : {}", file.display(), e);
-//                 continue;
-//             }
-//         };
-
-//         merged.merge(&json_val);
-//     }
-
-//     println!("JSON concaténé : {:#?}", merged);
-
-//     Ok(())
-
-// }
-
+    #[test]
+    fn test_search_datafiles() {
+        let result = search_datafiles();
+        assert!(result.is_ok());
+        let files = result.unwrap();
+        assert!(!files.is_empty());
+        for file in files {
+            assert!(file.extension().unwrap() == "json");
+        }
+    }
+}
