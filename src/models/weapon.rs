@@ -1,5 +1,6 @@
 use super::equipment::Equipment;
 
+#[derive(Debug, serde::Deserialize)]
 pub struct Weapon {
     equipment: Equipment,
 }

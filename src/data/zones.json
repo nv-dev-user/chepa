@@ -4,25 +4,34 @@
             "id": 1,
             "name": "Cramoîsile",
             "base-level": 2,
-            "spawn-rate": 0.5,
+            "spawn-rate": 50,
             "spawn-group": 3,
-            "zones": [3]
+            "north_zone_id":3,
+            "south_zone_id":null,
+            "east_zone_id":null,
+            "west_zone_id":null
         },
         {
             "id": 2,
             "name": "BetterWorld",
             "base-level": 2,
-            "spawn-rate": 0.1,
+            "spawn-rate": 25,
             "spawn-group": 2,
-            "zones": [1,3]
+            "north_zone_id":null,
+            "south_zone_id":3,
+            "east_zone_id":null,
+            "west_zone_id":null
         },
         {
             "id": 3,
             "name": "SeineStnDenis",
             "base-level": 10,
-            "spawn-rate": 0.95,
+            "spawn-rate": 100,
             "spawn-group": 1,
-            "zones": [1,2]
+            "north_zone_id":1,
+            "south_zone_id":2,
+            "east_zone_id":null,
+            "west_zone_id":null
         }
     ]
 }

@@ -1,5 +1,6 @@
 use super::entity::Entity;
 
+#[derive(Debug, serde::Deserialize)]
 pub struct Zone {
     entity: Entity,
     base_level: u32,

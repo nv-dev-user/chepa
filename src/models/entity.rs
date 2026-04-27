@@ -1,3 +1,4 @@
+#[derive(Debug, serde::Deserialize)]
 pub struct Entity {
     id: u32,
     name: String,
