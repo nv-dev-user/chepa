@@ -3,6 +3,7 @@ use super::entity::Entity;
 use super::weapon::Weapon;
 use super::zone::Zone;
 
+#[derive(Debug, Clone)]
 pub struct LivingEntity {
     entity: Entity,
     base_hp: u32,
@@ -13,6 +14,7 @@ pub struct LivingEntity {
     weapon: Option<Weapon>,
     armor: Option<Armor>,
     zone: Zone,
+    come_from: Zone,
 }
 
 impl LivingEntity {
@@ -26,6 +28,7 @@ impl LivingEntity {
         weapon: Option<Weapon>,
         armor: Option<Armor>,
         zone: Zone,
+        come_from: Zone,
     ) -> Self {
         Self {
             entity,
@@ -37,6 +40,7 @@ impl LivingEntity {
             weapon,
             armor,
             zone,
+            come_from,
         }
     }
 
@@ -74,6 +78,10 @@ impl LivingEntity {
 
     pub fn get_zone(&self) -> &Zone {
         &self.zone
+    }
+
+    pub fn get_come_from(&self) -> &Zone {
+        &self.come_from
     }
 
     pub fn set_weapon(&mut self, weapon: Weapon) {
@@ -120,6 +128,10 @@ impl LivingEntityCombat for LivingEntity {
 
     fn is_alive(&self) -> bool {
         self.base_hp > 0
+    }
+  
+    fn set_come_from(&mut self, come_from: Zone) {
+        self.come_from = come_from;
     }
 }
 

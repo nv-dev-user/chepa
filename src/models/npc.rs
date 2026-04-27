@@ -4,6 +4,7 @@ use super::item::Item;
 use std::collections::HashMap;
 use super::living_entity::LivingEntity;
 
+#[derive(Debug, Clone)]
 pub struct NPC {
     living_entity: LivingEntity,
     dialogs: Vec<String>,
@@ -12,13 +13,13 @@ pub struct NPC {
 
 impl NPC {
     pub fn new(
-        living_entity: LivingEntity, 
-        dialogs: Vec<String>, 
+        living_entity: LivingEntity,
+        dialogs: Vec<String>,
         droppable_items_percentage: HashMap<Item, f32>
     ) -> Self {
-        NPC { 
-            living_entity, 
-            dialogs, 
+        NPC {
+            living_entity,
+            dialogs,
             droppable_items_percentage }
     }
 
