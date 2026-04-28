@@ -1,10 +1,8 @@
 {
     "zones" : [
         {
-            "entity": {
-                "id": 1,
-                "name": "Cramoîsile"
-            },
+            "id": 1,
+            "name": "Cramoîsile",
             "base-level": 2,
             "spawn-rate": 50,
             "spawn-group": 3,
@@ -14,10 +12,8 @@
             "west_zone_id":null
         },
         {
-            "entity": {
-                "id": 2,
-                "name": "BetterWorld"
-            },
+            "id": 2,
+            "name": "BetterWorld",
             "base-level": 2,
             "spawn-rate": 25,
             "spawn-group": 2,
@@ -27,10 +23,8 @@
             "west_zone_id":null
         },
         {
-            "entity": {
-                "id": 3,
-                "name": "SeineStDenis"
-            },
+            "id": 3,
+            "name": "SeineStnDenis",
             "base-level": 10,
             "spawn-rate": 100,
             "spawn-group": 1,

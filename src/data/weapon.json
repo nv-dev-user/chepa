@@ -1,0 +1,19 @@
+{
+    "weapons":[
+        {
+            "id": 1,
+            "name": "Kanif",
+            "coef_attack": 2
+        },
+        {
+            "id": 2,
+            "name": "Epée banane",
+            "coef_attack": 100000
+        },
+        {
+            "id": 3,
+            "name": "Gouté",
+            "coef_attack": 1
+        }
+    ]
+}
