@@ -20,7 +20,7 @@ pub fn handle_input(lve: &mut LivingEntity, actions: &[Box<dyn Action>]) {
                           action.execute();
                       } else {return;}
                  }
-                _ => {}
+                _ => println!("Touche invalide")
             }
         }
     }
