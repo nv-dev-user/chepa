@@ -168,14 +168,14 @@ mod tests {
         let zone_entity = Entity::new(1, "test".to_string());
         let zone = Zone::new(zone_entity, 1, 1, Some(1), Some(1), Some(1), Some(1), Some(1));
         let living_entity = LivingEntity::new(entity, 1, 1, 1, 1, 1, Some(weapon), Some(armor), zone.clone(), zone.clone());
-        
+
         let target_entity = Entity::new(2, "target".to_string());
         let target_weapon = Weapon::new(2, "target".to_string(), 1);
         let target_armor = Armor::new(2, "target".to_string(), 1);
         let target_zone_entity = Entity::new(1, "test".to_string());
         let target_zone = Zone::new(target_zone_entity, 1, 1, Some(1), Some(1), Some(1), Some(1), Some(1));
         let mut target = LivingEntity::new(target_entity, 1, 1, 1, 1, 1, Some(target_weapon), Some(target_armor), target_zone.clone(), target_zone.clone());
-        
+
         living_entity.attack(&mut target);
         assert_eq!(target.get_base_hp(), 0);
     }
