@@ -25,6 +25,8 @@
     - Player
     - Weapon
     - Mob (ensuite transformé en LivingEntity et NPC)
+- Logique de gain d'expérience
+- Logique de drop d'items
 
 ### Nicolas
 - Réalisation des models :

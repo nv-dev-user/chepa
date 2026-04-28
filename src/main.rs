@@ -47,7 +47,7 @@ impl Game {
     }
 
     pub fn update(&mut self) {
-
+        services::input::handle_input();
     }
 
     pub fn render(&self) {
@@ -85,8 +85,8 @@ fn main() {
     let mut game = Game::new();
 
     loop {
-        game.update();
         game.render();
+        game.update();
         std::thread::sleep(std::time::Duration::from_millis(16));
     }
 }
