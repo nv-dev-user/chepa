@@ -25,13 +25,13 @@ impl Game {
     pub fn new() -> Self {
         // Get metadata from JSON file
         // Get entities form JSON files
-        let zones = match services::jsonparser::receive_data_from_file("./src/data/zones.json") {
+        let zones = match services::jsonparser::receive_data_from_file("./data/zones.json") {
             Ok(contenu) => load_zones(&contenu),
             Err(e) => Err(e),
         };
         println!("Zones chargées : {:?}", zones);
 
-        let weapons = match services::jsonparser::receive_data_from_file("./src/data/weapons.json") {
+        let weapons = match services::jsonparser::receive_data_from_file("./data/weapons.json") {
             Ok(contenu) => load_zones(&contenu),
             Err(e) => Err(e),
         };
