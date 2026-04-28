@@ -3,7 +3,7 @@ use super::entity::Entity;
 use super::weapon::Weapon;
 use super::zone::Zone;
 
-#[derive(Debug, Clone, serde::Deserialize)]
+#[derive(Debug, serde::Deserialize)]
 pub struct LivingEntity {
     entity: Entity,
     base_hp: u32,

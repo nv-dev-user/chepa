@@ -3,6 +3,11 @@ use std::fs;
 use std::io;
 use std::path::PathBuf;
 
+use crate::models::armor::Armor;
+use crate::models::metadata::Metadata;
+use crate::models::npc::NPC;
+use crate::models::player::Player;
+use crate::models::weapon::Weapon;
 use crate::models::zone::Zone;
 
 /*
@@ -57,6 +62,41 @@ pub fn load_zones(content : &str) -> io::Result<Vec<Zone>>{
         .map_err(|e| io::Error::new(io::ErrorKind::InvalidData, e))?;
 
     Ok(zones)
+}
+
+pub fn load_armors(content : &str) -> io::Result<Vec<Armor>> {
+    let armors: Vec<Armor> = serde_json::from_str(content)
+        .map_err(|e| io::Error::new(io::ErrorKind::InvalidData, e))?;
+
+    Ok(armors)
+}
+
+pub fn load_metadata(content : &str) -> io::Result<Metadata> {
+    let metadata: Metadata = serde_json::from_str(content)
+        .map_err(|e| io::Error::new(io::ErrorKind::InvalidData, e))?;
+
+    Ok(metadata)
+}
+
+pub fn load_weapons(content : &str) -> io::Result<Vec<Weapon>>{
+    let weapons: Vec<Weapon> = serde_json::from_str(content)
+        .map_err(|e| io::Error::new(io::ErrorKind::InvalidData, e))?;
+
+    Ok(weapons)
+}
+
+pub fn load_npc(content : &str) -> io::Result<Vec<NPC>>{
+    let npcs: Vec<NPC> = serde_json::from_str(content)
+        .map_err(|e| io::Error::new(io::ErrorKind::InvalidData, e))?;
+
+    Ok(npcs)
+}
+
+pub fn load_player(content : &str) -> io::Result<Player>{
+    let player: Player = serde_json::from_str(content)
+        .map_err(|e| io::Error::new(io::ErrorKind::InvalidData, e))?;
+
+    Ok(player)
 }
 
 #[cfg(test)]
@@ -118,6 +158,20 @@ mod tests {
         "#;
 
         let result = load_zones(content);
-        print!("Zones chargées : {:?}", result);
+        assert!(result.is_ok());
+        let zones = result.unwrap();
+        assert_eq!(zones.len(), 2);
+        assert_eq!(zones[0].get_entity().get_id(), 1);
+        assert_eq!(zones[0].get_entity().get_name(), "Zone 1");
+        assert_eq!(zones[0].get_north_zone_id(), Some(2));
+        assert_eq!(zones[0].get_east_zone_id(), None);
+        assert_eq!(zones[0].get_south_zone_id(), None);
+        assert_eq!(zones[0].get_west_zone_id(), None);
+        assert_eq!(zones[1].get_entity().get_id(), 2);
+        assert_eq!(zones[1].get_entity().get_name(), "Zone 2");
+        assert_eq!(zones[1].get_north_zone_id(), None);
+        assert_eq!(zones[1].get_east_zone_id(), None);
+        assert_eq!(zones[1].get_south_zone_id(), None);
+        assert_eq!(zones[1].get_west_zone_id(), Some(1));
     }
 }

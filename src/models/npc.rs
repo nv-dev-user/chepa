@@ -4,7 +4,7 @@ use super::item::Item;
 use std::collections::HashMap;
 use super::living_entity::LivingEntity;
 
-#[derive(Debug, Clone)]
+#[derive(Debug, serde::Deserialize)]
 pub struct NPC {
     living_entity: LivingEntity,
     dialogs: Vec<String>,

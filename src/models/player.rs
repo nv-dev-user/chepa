@@ -3,6 +3,7 @@ use crate::models::living_entity::LivingEntityCombat;
 use super::living_entity::LivingEntity;
 use super::npc::NPC;
 
+#[derive(Debug, serde::Deserialize)]
 pub struct Player {
     living_entity: LivingEntity,
     xp_total: u64,

@@ -1,4 +1,4 @@
-#[derive(Debug, Clone, serde::Deserialize)]
+#[derive(Debug, serde::Deserialize)]
 pub struct Metadata {
     title: String,
     version: String,
