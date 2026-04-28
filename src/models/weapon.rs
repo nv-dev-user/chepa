@@ -1,6 +1,6 @@
 use super::equipment::Equipment;
 
-#[derive(Debug, Clone)]
+#[derive(Debug, serde::Deserialize)]
 pub struct Weapon {
     equipment: Equipment,
 }
@@ -20,5 +20,9 @@ impl Weapon {
 
     pub fn get_name(&self) -> &str {
         self.equipment.get_name()
+    }
+
+    pub fn get_coef_modifier(&self) -> u32 {
+        self.equipment.get_coef_modifier()
     }
 }

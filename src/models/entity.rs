@@ -1,6 +1,4 @@
-
-
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, serde::Deserialize, PartialEq, Eq, Hash)]
 pub struct Entity {
     id: u32,
     name: String,

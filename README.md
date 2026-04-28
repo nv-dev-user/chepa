@@ -25,6 +25,9 @@
     - Player
     - Weapon
     - Mob (ensuite transformé en LivingEntity et NPC)
+- Logique de gain d'expérience
+- Logique de drop d'items
+- Logique des input actions
 
 ### Nicolas
 - Réalisation des models :
@@ -35,5 +38,29 @@
 
 
 
+- Implémentation des logiques de calculs (drop items, gain exp, etc...)
+
+### Thomas
+
+- Modèle :
+    - Equipement
+- Modification :
+    - Armor
+    - Weapon
+
+Système de combat :
+- LivingEntityCombat
+- Modification :
+    - LivingEntity
+    - Player
+    - NPC
+
+- Services :
+    - Zone
+    - Input
+
+### Les autres
+
 - M -> Metadata, JsonParser
+- N -> Zone, PNJ
 - T -> Item, Armor
