@@ -39,6 +39,24 @@
 
 - Implémentation des logiques de calculs (drop items, gain exp, etc...)
 
+### Thomas
+
+- Modèle :
+    - Equipement
+- Modification :
+    - Armor
+    - Weapon
+
+Système de combat :
+- LivingEntityCombat
+- Modification :
+    - LivingEntity
+    - Player
+    - NPC
+
+- Services :
+    - Zone
+    - Input
 
 ### Les autres
 

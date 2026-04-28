@@ -1,12 +1,12 @@
-use chepa::services::renderer::render_player_position;
+use crate::services::renderer::render_player_position;
 
-use chepa::models::armor::Armor;
-use chepa::models::entity::Entity;
-use chepa::models::living_entity::LivingEntity;
-use chepa::models::weapon::Weapon;
-use chepa::models::zone::Zone;
-use chepa::models::npc::NPC;
-use chepa::models::player::Player;
+use crate::models::armor::Armor;
+use crate::models::entity::Entity;
+use crate::models::living_entity::LivingEntity;
+use crate::models::weapon::Weapon;
+use crate::models::zone::Zone;
+use crate::models::npc::NPC;
+use crate::models::player::Player;
 
 mod services;
 mod models;
@@ -47,7 +47,7 @@ impl Game {
     }
 
     pub fn update(&mut self) {
-        services::input::handle_input();
+        services::input::handle_input(self.player.get_mut_living_entity());
     }
 
     pub fn render(&self) {
