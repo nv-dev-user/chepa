@@ -27,6 +27,7 @@
     - Mob (ensuite transformé en LivingEntity et NPC)
 - Logique de gain d'expérience
 - Logique de drop d'items
+- Logique des input actions
 
 ### Nicolas
 - Réalisation des models :

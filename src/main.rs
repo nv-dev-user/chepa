@@ -47,7 +47,8 @@ impl Game {
     }
 
     pub fn update(&mut self) {
-        services::input::handle_input(self.player.get_mut_living_entity());
+        let actions  = services::action::default_actions();
+        services::input::handle_input(self.player.get_mut_living_entity(), &actions);
     }
 
     pub fn render(&self) {
