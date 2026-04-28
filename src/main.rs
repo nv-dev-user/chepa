@@ -47,7 +47,8 @@ impl Game {
     }
 
     pub fn update(&mut self) {
-        services::input::handle_input();
+        let actions  = services::action::default_actions();
+        services::input::handle_input(&actions);
     }
 
     pub fn render(&self) {
