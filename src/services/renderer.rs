@@ -1,5 +1,5 @@
 use crate::models::{living_entity::LivingEntity, zone::Zone};
-use crate::services::zones::searchZoneById;
+use crate::services::{zones::searchZoneById, action};
 
 use crossterm::terminal;
 
@@ -43,20 +43,10 @@ pub fn render_player_position(player: &LivingEntity, zones: &Vec<Zone>) {
     println!("{}{}", space_south, south_name);
 }
 
-pub fn render_possible_actions(actions ){
+pub fn render_possible_actions(actions: Vec<Box<dyn action::Action>>){
     for (i, value) in actions.iter().enumerate() {
-        println!("{} : {}", i, value);
+        println!("{} : {}", i, value.get_description());
     }
-    println!("0 : ");
-    println!("1 : ");
-    println!("2 : ");
-    println!("3 : ");
-    println!("4 : ");
-    println!("5 : ");
-    println!("6 : ");
-    println!("7 : ");
-    println!("8 : ");
-    println!("9 : ");
 }
 
 fn render_arrow_for_position(player: &LivingEntity, zones: [Option<u32>; 4]) -> String {
@@ -106,6 +96,18 @@ mod tests {
         );
 
         render_player_position(&player, &zones);
+        // Assertions ici
+    }
+
+    #[test]
+    fn test_render_possible_actions() {
+        let actions: Vec<Box<dyn action::Action>> = vec![
+            Box::new(action::SpeakToNPCAction),
+            Box::new(action::UseItemAction),
+            Box::new(action::AttackAction)
+        ];
+
+        render_possible_actions(actions);
         // Assertions ici
     }
 }
