@@ -87,8 +87,7 @@ fn main() {
     let mut game = Game::new();
 
     loop {
-        game.update();
         game.render();
-        std::thread::sleep(std::time::Duration::from_secs(2));
+        game.update();
     }
 }
