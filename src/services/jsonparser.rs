@@ -101,6 +101,10 @@ pub fn load_player(content : &str) -> io::Result<Player>{
 
 #[cfg(test)]
 mod tests {
+    use jsonparser::JSONParser;
+
+    use crate::models::entity::Entity;
+
     use super::*;
 
     #[test]
@@ -173,5 +177,44 @@ mod tests {
         assert_eq!(zones[1].get_east_zone_id(), None);
         assert_eq!(zones[1].get_south_zone_id(), None);
         assert_eq!(zones[1].get_west_zone_id(), Some(1));
+    }
+
+    #[test]
+    fn test_parse_json() {
+        let content = r#"
+        {
+            "id": 1,
+            "name": "Zone 1",
+            "base_level": 1,
+            "spawn_rate": 10,
+            "spawn_group_id": null,
+            "north_zone_id": 2,
+            "east_zone_id": null,
+            "south_zone_id": null,
+            "west_zone_id": null
+        }
+        "#;
+
+        let object: serde_json::Value = serde_json::from_str(content).unwrap();
+
+        let id = object["id"].as_u64().unwrap() as u32;
+        let name = object["name"].as_str().unwrap().to_string();
+        let base_level = object["base_level"].as_u64().unwrap() as u32;
+        let spawn_rate = object["spawn_rate"].as_u64().unwrap() as u8;
+        let north_zone_id = object["north_zone_id"].as_u64().map(|n| n as u32);
+
+        let zone = Zone::new(
+            Entity::new(id, name),
+            base_level,
+            spawn_rate,
+            None,
+            north_zone_id,
+            None,
+            None,
+            None
+        );
+
+        //println!("Object: {:?}", object);
+        println!("Zone: {:?}", zone);
     }
 }

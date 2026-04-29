@@ -1,76 +1,12 @@
-<<<<<<< HEAD
-{
-    "npcs" : [
-        {
-            "id": 1,
-            "name": "Thomas la proie",
-            "base-hp": 2,
-            "base-xp": 1,
-            "base-attack": 1,
-            "base-speed": 10,
-            "base-parade": 3,
-            "weapon": 3,
-            "armor": null,
-            "zone_id": 3,
-            "dialogue": [
-                "Nan steplé laisse moi trkl...",
-                "A l'aide !"
-            ],
-            "droppable_items_percentage": {
-                "3":1
-            }
-        },
-        {
-            "id": 2,
-            "name": "Mec problématique",
-            "base-hp": 7,
-            "base-xp": 5,
-            "base-attack": 4,
-            "base-speed": 3,
-            "base-parade": 5,
-            "weapon": 2,
-            "armor": 2,
-            "zone_id": 3,
-            "dialogue": [
-                "Donnes ton goûté",
-                "Eh ma demoiselle !"
-            ],
-            "droppable_items_percentage": {
-
-            }
-        },
-        {
-            "id": 3,
-            "name": "Orc",
-            "base-hp": 10,
-            "base-xp": 7,
-            "base-attack": 6,
-            "base-speed": 2,
-            "base-parade": 5,
-            "weapon": 2,
-            "armor": 1,
-            "zone_id": 3,
-            "dialogue": [
-                "WAAAAAAAAAG"
-            ],
-            "droppable_items_percentage": {
-
-            }
-        }
-    ]
-}
-=======
 [
   {
     "id": 1,
     "name": "Loup gris",
-    "living_entity": {
-      "base_hp": 85,
-      "base_attack": 18,
-      "base_speed": 22,
-      "base_parade": 10,
-      "base_xp": 70
-    },
+    "base_hp": 85,
+    "base_attack": 18,
+    "base_speed": 22,
+    "base_parade": 10,
+    "base_xp": 70,
     "dialogs": [
       "Grrrr..."
     ],
@@ -82,13 +18,11 @@
   {
     "id": 2,
     "name": "Sanglier sauvage",
-    "living_entity": {
-      "base_hp": 120,
-      "base_attack": 24,
-      "base_speed": 14,
-      "base_parade": 16,
-      "base_xp": 95
-    },
+    "base_hp": 120,
+    "base_attack": 24,
+    "base_speed": 14,
+    "base_parade": 16,
+    "base_xp": 95,
     "dialogs": [
       "Snorf!"
     ],
@@ -100,13 +34,11 @@
   {
     "id": 3,
     "name": "Tigre",
-    "living_entity": {
-      "base_hp": 70,
-      "base_attack": 21,
-      "base_speed": 26,
-      "base_parade": 8,
-      "base_xp": 110
-    },
+    "base_hp": 70,
+    "base_attack": 21,
+    "base_speed": 26,
+    "base_parade": 8,
+    "base_xp": 110,
     "dialogs": [
       "Roar!"
     ],
@@ -118,13 +50,11 @@
   {
     "id": 4,
     "name": "Bandit des routes",
-    "living_entity": {
-      "base_hp": 105,
-      "base_attack": 27,
-      "base_speed": 18,
-      "base_parade": 14,
-      "base_xp": 130
-    },
+    "base_hp": 105,
+    "base_attack": 27,
+    "base_speed": 18,
+    "base_parade": 14,
+    "base_xp": 130,
     "dialogs": [
       "Ta bourse ou ta vie !",
       "Tu n'iras pas plus loin."
@@ -137,13 +67,11 @@
   {
     "id": 5,
     "name": "Garde veteran",
-    "living_entity": {
-      "base_hp": 140,
-      "base_attack": 29,
-      "base_speed": 16,
-      "base_parade": 22,
-      "base_xp": 160
-    },
+    "base_hp": 140,
+    "base_attack": 29,
+    "base_speed": 16,
+    "base_parade": 22,
+    "base_xp": 160,
     "dialogs": [
       "Restez sur la route principale.",
       "La region est dangereuse apres la tombee de la nuit."
@@ -154,4 +82,3 @@
     }
   }
 ]
->>>>>>> develop

@@ -3,10 +3,10 @@ use crate::models::{living_entity::LivingEntity, zone::Zone};
 pub fn render_player_position(player: &LivingEntity, zones: &Vec<Zone>) {
     // Render around the zone
 
-    let north = player.get_zone().get_north_zone_id();
-    let east = player.get_zone().get_east_zone_id();
-    let west = player.get_zone().get_west_zone_id();
-    let south = player.get_zone().get_south_zone_id();
+    let north = player.get_zone().as_ref().unwrap().get_north_zone_id();
+    let east = player.get_zone().as_ref().unwrap().get_east_zone_id();
+    let west = player.get_zone().as_ref().unwrap().get_west_zone_id();
+    let south = player.get_zone().as_ref().unwrap().get_south_zone_id();
 
     println!("North: {:?}", north);
     print!("East: {:?} ", east);
@@ -52,7 +52,7 @@ mod tests {
         let player = LivingEntity::new(
             Entity::new(1, "Player".to_string()),
             100, 10, 5, 5, 0, None, None,
-            Zone::new(Entity::new(1, "Zone 1".to_string()), 1, 10, None, Some(2), None, None, None),
+            Some(Zone::new(Entity::new(1, "Zone 1".to_string()), 1, 10, None, Some(2), None, None, None)),
             Zone::new(Entity::new(2, "Zone 2".to_string()), 1, 10, None, None, Some(1), None, None)
         );
 
