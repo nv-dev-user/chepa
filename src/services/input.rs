@@ -3,8 +3,15 @@ use crate::services::zone::{
     changeLivingEntityZone,
     Direction,
 };
-use crossterm::event::{read, Event, KeyCode, KeyEventKind};
+use crossterm::event::{poll, read, Event, KeyCode, KeyEventKind};
 use crate::services::action::Action;
+use std::time::Duration;
+
+fn clear_pending_input_events() {
+    while poll(Duration::from_millis(0)).unwrap_or(false) {
+        let _ = read();
+    }
+}
 
 pub fn handle_input(lve: &mut LivingEntity, actions: &[Box<dyn Action>]) {
     if let Ok(Event::Key(key_event)) = read() {
@@ -22,6 +29,7 @@ pub fn handle_input(lve: &mut LivingEntity, actions: &[Box<dyn Action>]) {
                  }
                 _ => println!("Touche invalide")
             }
+            clear_pending_input_events();
         }
     }
 }
