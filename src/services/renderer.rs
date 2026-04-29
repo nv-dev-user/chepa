@@ -3,7 +3,21 @@ use crate::services::{zones::searchZoneById, action};
 
 use crossterm::terminal;
 
-pub fn render_player_position(player: &LivingEntity, zones: &Vec<Zone>) {
+pub fn render(player: &LivingEntity, zones: &Vec<Zone>, actions: Vec<Box<dyn action::Action>>){
+    let (cols, rows) = terminal::size().unwrap();
+    let separation = "=".repeat(cols as usize);
+    println!("{}\n\n", separation);
+    render_player_position(player, zones);
+    println!("\n\n");
+    render_possible_actions(actions);
+    println!("\n{}", separation);
+}
+
+pub fn render_fight(){
+    
+}
+
+fn render_player_position(player: &LivingEntity, zones: &Vec<Zone>) {
     // Render around the zone
 
     // Find id and name of each neighbor zones
@@ -43,11 +57,25 @@ pub fn render_player_position(player: &LivingEntity, zones: &Vec<Zone>) {
     println!("{}{}", space_south, south_name);
 }
 
-pub fn render_possible_actions(actions: Vec<Box<dyn action::Action>>){
+fn render_possible_actions(actions: Vec<Box<dyn action::Action>>){
     for (i, value) in actions.iter().enumerate() {
-        println!("{} : {}", i, value.get_description());
+        println!("        {} : {}", i, value.get_description());
     }
 }
+
+// pub fn render_fight_for_action(){
+//     top_action = "Defendre"
+//     left_action = 
+//     right_action = 
+
+//     let space_left = " ".repeat((cols as usize)/2 - (left_action.chars().count()+6));
+//     let space_top = " ".repeat((cols as usize)/2 - (top_action.chars().count())/2);
+
+//     println!("{}{}\n", space_top, top_action);
+//     print!("{}{}", space_left, left_action);
+//     print!("      ●      ");
+//     println!("{}\n", right_action);
+// }
 
 fn render_arrow_for_position(player: &LivingEntity, zones: [Option<u32>; 4]) -> String {
     let player_zone_id = player.get_come_from().get_entity().get_id();
@@ -94,8 +122,13 @@ mod tests {
             Zone::new(Entity::new(1, "Zone 1".to_string()), 1, 10, None, Some(2), Some(1), Some(4), Some(3)),
             Zone::new(Entity::new(3, "Zone 2".to_string()), 1, 10, None, None, Some(1), None, None)
         );
+        let actions: Vec<Box<dyn action::Action>> = vec![
+            Box::new(action::SpeakToNPCAction),
+            Box::new(action::UseItemAction),
+            Box::new(action::AttackAction)
+        ];
 
-        render_player_position(&player, &zones);
+        render(&player, &zones, actions);
         // Assertions ici
     }
 
@@ -106,6 +139,36 @@ mod tests {
             Box::new(action::UseItemAction),
             Box::new(action::AttackAction)
         ];
+
+        render_possible_actions(actions);
+        // Assertions ici
+    }
+
+    #[test]
+    fn test_render() {
+        let actions: Vec<Box<dyn action::Action>> = vec![
+            Box::new(action::SpeakToNPCAction),
+            Box::new(action::UseItemAction),
+            Box::new(action::AttackAction)
+        ];
+
+        let zones = Vec::from([
+            Zone::new(Entity::new(1, "Zone 1".to_string()), 1, 10, None, Some(2), Some(1), Some(4), Some(3)),
+            Zone::new(Entity::new(2, "Zone 2".to_string()), 1, 10, None, None, Some(1), None, None),
+            Zone::new(Entity::new(3, "Zone 3".to_string()), 1, 10, None, None, None, Some(4), None),
+            Zone::new(Entity::new(4, "Zone 4".to_string()), 1, 10, None, None, None, None, Some(3))
+
+            // Zone::new(Entity::new(1, "Zone 1".to_string()), 1, 10, None, Some(2), Some(1), Some(4), Some(3)),
+            // Zone::new(Entity::new(2, "Zone 2".to_string()), 1, 10, None, Some(2), Some(1), Some(4), Some(3)),
+            // Zone::new(Entity::new(3, "Zone 3".to_string()), 1, 10, None, Some(2), Some(1), Some(4), Some(3)),
+            // Zone::new(Entity::new(4, "Zone 4".to_string()), 1, 10, None, Some(2), Some(1), Some(4), Some(3))
+        ]);
+        let player = LivingEntity::new(
+            Entity::new(1, "Player".to_string()),
+            100, 10, 5, 5, 0, None, None,
+            Zone::new(Entity::new(1, "Zone 1".to_string()), 1, 10, None, Some(2), Some(1), Some(4), Some(3)),
+            Zone::new(Entity::new(3, "Zone 2".to_string()), 1, 10, None, None, Some(1), None, None)
+        );
 
         render_possible_actions(actions);
         // Assertions ici
