@@ -14,7 +14,27 @@ pub fn render(player: &LivingEntity, zones: &Vec<Zone>, actions: Vec<Box<dyn act
 }
 
 pub fn render_fight(){
+    let (cols, rows) = terminal::size().unwrap();
+    let separation = "=".repeat(cols as usize);
+    println!("{}\n\n", separation);
+
+
+
+    let top_action = "Attaquer (Z)";
+    let left_action = "Defendre (Q)";
+    let right_action = "Fuir (D)";
+
+    let space_left = " ".repeat((cols as usize)/2 - (left_action.chars().count()+6));
+    let space_top = " ".repeat((cols as usize)/2 - (top_action.chars().count())/2);
+
+    println!("{}{}\n", space_top, top_action);
+    print!("{}{}", space_left, left_action);
+    print!("      ●      ");
+    println!("{}\n", right_action);
+
+
     
+    println!("\n{}", separation);
 }
 
 fn render_player_position(player: &LivingEntity, zones: &Vec<Zone>) {
@@ -62,20 +82,6 @@ fn render_possible_actions(actions: Vec<Box<dyn action::Action>>){
         println!("        {} : {}", i, value.get_description());
     }
 }
-
-// pub fn render_fight_for_action(){
-//     top_action = "Defendre"
-//     left_action = 
-//     right_action = 
-
-//     let space_left = " ".repeat((cols as usize)/2 - (left_action.chars().count()+6));
-//     let space_top = " ".repeat((cols as usize)/2 - (top_action.chars().count())/2);
-
-//     println!("{}{}\n", space_top, top_action);
-//     print!("{}{}", space_left, left_action);
-//     print!("      ●      ");
-//     println!("{}\n", right_action);
-// }
 
 fn render_arrow_for_position(player: &LivingEntity, zones: [Option<u32>; 4]) -> String {
     let player_zone_id = player.get_come_from().get_entity().get_id();
@@ -129,6 +135,12 @@ mod tests {
         ];
 
         render(&player, &zones, actions);
+        // Assertions ici
+    }
+
+    #[test]
+    fn test_render_fight() {
+        render_fight();
         // Assertions ici
     }
 
