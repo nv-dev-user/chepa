@@ -1,4 +1,4 @@
-use crate::services::renderer::render_player_position;
+use crate::services::renderer::render;
 
 use crate::models::armor::Armor;
 use crate::models::entity::Entity;
@@ -52,7 +52,8 @@ impl Game {
     }
 
     pub fn render(&self) {
-        render_player_position(&self.player.get_living_entity(), &self.zones);
+        println!("ougagagaagagbouga");
+        render(&self.player.get_living_entity(), &self.zones, services::action::default_actions());
     }
 }
 
@@ -86,8 +87,8 @@ fn main() {
     let mut game = Game::new();
 
     loop {
-        game.render();
         game.update();
-        std::thread::sleep(std::time::Duration::from_millis(16));
+        game.render();
+        std::thread::sleep(std::time::Duration::from_secs(2));
     }
 }
