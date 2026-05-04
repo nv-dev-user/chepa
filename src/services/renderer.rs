@@ -1,5 +1,5 @@
 use crate::models::{living_entity::LivingEntity, zone::Zone};
-use crate::services::{zones::searchZoneById, action};
+use crate::services::{zone::search_zone_by_id, action};
 
 use crossterm::terminal;
 
@@ -43,22 +43,22 @@ fn render_player_position(player: &LivingEntity, zones: &Vec<Zone>) {
     // Find id and name of each neighbor zones
     let north = player.get_zone().get_north_zone_id();
     let north_name = north
-        .and_then(|i| searchZoneById(i, zones))
+        .and_then(|i| search_zone_by_id(i, zones))
         .map(|zone| format!("North (Z): {}", zone.get_entity().get_name()))
         .unwrap_or_default();
     let east = player.get_zone().get_east_zone_id();
     let east_name = east
-        .and_then(|i| searchZoneById(i, zones))
+        .and_then(|i| search_zone_by_id(i, zones))
         .map(|zone| format!("East (D): {}", zone.get_entity().get_name()))
         .unwrap_or_default();
     let west = player.get_zone().get_west_zone_id();
     let west_name = west
-        .and_then(|i| searchZoneById(i, zones))
+        .and_then(|i| search_zone_by_id(i, zones))
         .map(|zone| format!("West (Q): {}", zone.get_entity().get_name()))
         .unwrap_or_default();
     let south = player.get_zone().get_south_zone_id();
     let south_name = south
-        .and_then(|i| searchZoneById(i, zones))
+        .and_then(|i| search_zone_by_id(i, zones))
         .map(|zone| format!("South (S): {}", zone.get_entity().get_name()))
         .unwrap_or_default();
 

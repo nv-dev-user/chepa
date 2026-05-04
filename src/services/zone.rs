@@ -8,7 +8,7 @@ pub enum Direction {
     Est,
 }
 
-pub fn changeLivingEntityZone(lve: &mut LivingEntity, direction: Direction) {
+pub fn change_living_entity_zone(lve: &mut LivingEntity, direction: Direction) {
     let current_zone = lve.get_zone();
     match direction {
         Direction::Nord => {
@@ -48,4 +48,13 @@ pub fn changeLivingEntityZone(lve: &mut LivingEntity, direction: Direction) {
             }
         },
     }
+}
+
+pub fn search_zone_by_id(id: u32, zones: &Vec<Zone>) -> Option<&Zone> {
+    for zone in zones {
+        if zone.get_entity().get_id() == id {
+            return Some(zone);
+        }
+    }
+    None
 }
