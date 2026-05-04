@@ -68,6 +68,7 @@ Système de combat :
     - JsonParser (commencé)
     - Render de déplacement
     - Render de Combat
+    - Zone (ajout)
 
 ### Les autres
 
