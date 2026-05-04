@@ -59,6 +59,16 @@ Système de combat :
     - Zone
     - Input
 
+### Martin
+
+- Modèle :
+    - Metadata
+
+- Services :
+    - JsonParser (commencé)
+    - Render de déplacement
+    - Render de Combat
+
 ### Les autres
 
 - M -> Metadata, JsonParser
