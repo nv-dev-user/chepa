@@ -53,7 +53,7 @@ impl Game {
         }
 
         match jsonparser::receive_data_from_file("data/npcs.json") {
-            Ok(npcs_data) => match jsonparser::load_npc(&npcs_data) {
+            Ok(npcs_data) => match jsonparser::load_npc(&npcs_data, &self.zones) {
                 Ok(npcs) => self.npcs = npcs,
                 Err(e) => eprintln!("Error parsing npcs: {}", e),
             },

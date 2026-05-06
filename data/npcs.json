@@ -1,84 +1,96 @@
-[
-  {
-    "id": 1,
-    "name": "Loup gris",
-    "base_hp": 85,
-    "base_attack": 18,
-    "base_speed": 22,
-    "base_parade": 10,
-    "base_xp": 70,
-    "dialogs": [
-      "Grrrr..."
-    ],
-    "droppable_items_percentage": {
-      "Peau de loup": 45.0,
-      "Crocs uses": 30.0
+{ 
+  "npcs": [
+    {
+      "id": 1,
+      "name": "Loup gris",
+      "living_entity": {
+        "base_hp": 85,
+        "base_attack": 18,
+        "base_speed": 22,
+        "base_parade": 10,
+        "base_xp": 70
+      },
+      "dialogs": [
+        "Grrrr..."
+      ],
+      "droppable_items_percentage": {
+        "Peau de loup": 45.0,
+        "Crocs uses": 30.0
+      }
+    },
+    {
+      "id": 2,
+      "name": "Sanglier sauvage",
+      "living_entity": {
+        "base_hp": 120,
+        "base_attack": 24,
+        "base_speed": 14,
+        "base_parade": 16,
+        "base_xp": 95
+      },
+      "dialogs": [
+        "Snorf!"
+      ],
+      "droppable_items_percentage": {
+        "Defense de sanglier": 25.0,
+        "Cuir epais": 40.0
+      }
+    },
+    {
+      "id": 3,
+      "name": "Tigre",
+      "living_entity": {
+        "base_hp": 70,
+        "base_attack": 21,
+        "base_speed": 26,
+        "base_parade": 8,
+        "base_xp": 110
+      },
+      "dialogs": [
+        "Roar!"
+      ],
+      "droppable_items_percentage": {
+        "Fil de soie": 50.0,
+        "Venin instable": 18.0
+      }
+    },
+    {
+      "id": 4,
+      "name": "Bandit des routes",
+      "living_entity": {
+        "base_hp": 105,
+        "base_attack": 27,
+        "base_speed": 18,
+        "base_parade": 14,
+        "base_xp": 130
+      },
+      "dialogs": [
+        "Ta bourse ou ta vie !",
+        "Tu n'iras pas plus loin."
+      ],
+      "droppable_items_percentage": {
+        "Bourse percee": 35.0,
+        "Dague rouillee": 20.0
+      }
+    },
+    {
+      "id": 5,
+      "name": "Garde veteran",
+      "living_entity": {
+        "base_hp": 140,
+        "base_attack": 29,
+        "base_speed": 16,
+        "base_parade": 22,
+        "base_xp": 160
+      },
+      "dialogs": [
+        "Restez sur la route principale.",
+        "La region est dangereuse apres la tombee de la nuit."
+      ],
+      "droppable_items_percentage": {
+        "Insigne de garde": 12.0,
+        "Ration de campagne": 55.0
+      }
     }
-  },
-  {
-    "id": 2,
-    "name": "Sanglier sauvage",
-    "base_hp": 120,
-    "base_attack": 24,
-    "base_speed": 14,
-    "base_parade": 16,
-    "base_xp": 95,
-    "dialogs": [
-      "Snorf!"
-    ],
-    "droppable_items_percentage": {
-      "Defense de sanglier": 25.0,
-      "Cuir epais": 40.0
-    }
-  },
-  {
-    "id": 3,
-    "name": "Tigre",
-    "base_hp": 70,
-    "base_attack": 21,
-    "base_speed": 26,
-    "base_parade": 8,
-    "base_xp": 110,
-    "dialogs": [
-      "Roar!"
-    ],
-    "droppable_items_percentage": {
-      "Fil de soie": 50.0,
-      "Venin instable": 18.0
-    }
-  },
-  {
-    "id": 4,
-    "name": "Bandit des routes",
-    "base_hp": 105,
-    "base_attack": 27,
-    "base_speed": 18,
-    "base_parade": 14,
-    "base_xp": 130,
-    "dialogs": [
-      "Ta bourse ou ta vie !",
-      "Tu n'iras pas plus loin."
-    ],
-    "droppable_items_percentage": {
-      "Bourse percee": 35.0,
-      "Dague rouillee": 20.0
-    }
-  },
-  {
-    "id": 5,
-    "name": "Garde veteran",
-    "base_hp": 140,
-    "base_attack": 29,
-    "base_speed": 16,
-    "base_parade": 22,
-    "base_xp": 160,
-    "dialogs": [
-      "Restez sur la route principale.",
-      "La region est dangereuse apres la tombee de la nuit."
-    ],
-    "droppable_items_percentage": {
-      "Insigne de garde": 12.0,
-      "Ration de campagne": 55.0
-    }
-  }
-]
+  ]
+}
