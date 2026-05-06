@@ -1,0 +1,13 @@
+{
+    "id": 1,
+    "name": "Hero",
+    "base_hp": 100,
+    "base_attack": 20,
+    "base_speed": 15,
+    "base_parade": 10,
+    "base_xp": 0,
+    "weapon": {},
+    "armor": {},
+    "zone": 1,
+    "xp_total": 100
+}
