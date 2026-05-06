@@ -29,12 +29,15 @@
 - Logique de drop d'items
 - Logique des input actions
 
-### Nicolas
+### Nicolas
 - Réalisation des models :
     - Zone
     - PNJ (ensuite transformé en LivingEntity et NPC par Paul)
 - Réalisation des controllers :
     - LivingEntityController
+- Réalisation de services :
+    - Rendu de déplacement
+    - Jsonparser
 
 
 
