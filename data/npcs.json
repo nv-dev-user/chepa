@@ -3,13 +3,12 @@
     {
       "id": 1,
       "name": "Loup gris",
-      "living_entity": {
-        "base_hp": 85,
-        "base_attack": 18,
-        "base_speed": 22,
-        "base_parade": 10,
-        "base_xp": 70
-      },
+      "base_hp": 85,
+      "base_attack": 18,
+      "base_speed": 22,
+      "base_parade": 10,
+      "zone_id": 1,
+      "base_xp": 70,
       "dialogs": [
         "Grrrr..."
       ],
@@ -21,13 +20,12 @@
     {
       "id": 2,
       "name": "Sanglier sauvage",
-      "living_entity": {
-        "base_hp": 120,
-        "base_attack": 24,
-        "base_speed": 14,
-        "base_parade": 16,
-        "base_xp": 95
-      },
+      "base_hp": 120,
+      "base_attack": 24,
+      "base_speed": 14,
+      "base_parade": 16,
+      "zone_id": 1,
+      "base_xp": 95,
       "dialogs": [
         "Snorf!"
       ],
@@ -39,13 +37,12 @@
     {
       "id": 3,
       "name": "Tigre",
-      "living_entity": {
-        "base_hp": 70,
-        "base_attack": 21,
-        "base_speed": 26,
-        "base_parade": 8,
-        "base_xp": 110
-      },
+      "base_hp": 70,
+      "base_attack": 21,
+      "base_speed": 26,
+      "base_parade": 8,
+      "zone_id": 1,
+      "base_xp": 110,
       "dialogs": [
         "Roar!"
       ],
@@ -57,13 +54,12 @@
     {
       "id": 4,
       "name": "Bandit des routes",
-      "living_entity": {
-        "base_hp": 105,
-        "base_attack": 27,
-        "base_speed": 18,
-        "base_parade": 14,
-        "base_xp": 130
-      },
+      "base_hp": 105,
+      "base_attack": 27,
+      "base_speed": 18,
+      "base_parade": 14,
+      "zone_id": 1,
+      "base_xp": 130,
       "dialogs": [
         "Ta bourse ou ta vie !",
         "Tu n'iras pas plus loin."
@@ -76,13 +72,12 @@
     {
       "id": 5,
       "name": "Garde veteran",
-      "living_entity": {
-        "base_hp": 140,
-        "base_attack": 29,
-        "base_speed": 16,
-        "base_parade": 22,
-        "base_xp": 160
-      },
+      "base_hp": 140,
+      "base_attack": 29,
+      "base_speed": 16,
+      "base_parade": 22,
+      "base_xp": 160,
+      "zone_id": 1,
       "dialogs": [
         "Restez sur la route principale.",
         "La region est dangereuse apres la tombee de la nuit."
