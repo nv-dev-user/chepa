@@ -28,6 +28,7 @@
 - Logique de gain d'expérience
 - Logique de drop d'items
 - Logique des input actions
+- Implémentation des logiques de calculs (drop items, gain exp, etc...)
 
 ### Nicolas
 - Réalisation des models :
@@ -38,10 +39,6 @@
 - Réalisation de services :
     - Rendu de déplacement
     - Jsonparser
-
-
-
-- Implémentation des logiques de calculs (drop items, gain exp, etc...)
 
 ### Thomas
 
