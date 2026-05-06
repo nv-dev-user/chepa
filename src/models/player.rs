@@ -129,7 +129,7 @@ mod tests {
             50,
             None,
             None,
-            make_zone(),
+            Some(make_zone().clone()),
             make_zone(),
         )
     }
