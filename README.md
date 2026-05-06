@@ -13,7 +13,11 @@
 ## SERVICES
 
 - JsonParser
-
+- Renderer
+- Input
+- Action
+- Zone
+- Rewards
 
 ## ROLES
 
@@ -39,6 +43,7 @@
 - Réalisation de services :
     - Rendu de déplacement
     - Jsonparser
+- Réalisation de la structure du jeu (setup/run(update/render))
 
 ### Thomas
 
