@@ -13,7 +13,7 @@ pub struct LivingEntity {
     base_xp: u32,
     weapon: Option<Weapon>,
     armor: Option<Armor>,
-    zone: Zone,
+    zone: Option<Zone>,
     come_from: Zone,
 }
 
@@ -27,7 +27,7 @@ impl LivingEntity {
         base_xp: u32,
         weapon: Option<Weapon>,
         armor: Option<Armor>,
-        zone: Zone,
+        zone: Option<Zone>,
         come_from: Zone,
     ) -> Self {
         Self {
@@ -76,8 +76,8 @@ impl LivingEntity {
         self.armor.as_ref()
     }
 
-    pub fn get_zone(&self) -> &Zone {
-        &self.zone
+    pub fn get_zone(&self) -> Option<&Zone> {
+        self.zone.as_ref()
     }
 
     pub fn get_come_from(&self) -> &Zone {
@@ -93,7 +93,7 @@ impl LivingEntity {
     }
 
     pub fn set_zone(&mut self, zone: Zone) {
-        self.zone = zone;
+        self.zone = Some(zone);
     }
 
     pub fn set_come_from(&mut self, come_from: Zone) {
@@ -146,7 +146,7 @@ mod tests {
         let armor = Armor::new(1, "test".to_string(), 1);
         let zone_entity = Entity::new(1, "test".to_string());
         let zone = Zone::new(zone_entity, 1, 1, Some(1), Some(1), Some(1), Some(1), Some(1));
-        let living_entity = LivingEntity::new(entity, 1, 1, 1, 1, 1, Some(weapon), Some(armor), zone.clone(), zone.clone());
+        let living_entity = LivingEntity::new(entity, 1, 1, 1, 1, 1, Some(weapon), Some(armor), Some(zone.clone()), zone.clone());
         assert_eq!(living_entity.get_entity().get_id(), 1);
         assert_eq!(living_entity.get_entity().get_name(), "test");
         assert_eq!(living_entity.get_base_hp(), 1);
@@ -156,8 +156,8 @@ mod tests {
         assert_eq!(living_entity.get_base_xp(), 1);
         assert_eq!(living_entity.get_weapon().is_some(), true);
         assert_eq!(living_entity.get_armor().is_some(), true);
-        assert_eq!(living_entity.get_zone().get_entity().get_id(), 1);
-        assert_eq!(living_entity.get_zone().get_entity().get_name(), "test");
+        assert_eq!(living_entity.get_zone().as_ref().unwrap().get_entity().get_id(), 1);
+        assert_eq!(living_entity.get_zone().as_ref().unwrap().get_entity().get_name(), "test");
     }
 
     #[test]
@@ -167,14 +167,14 @@ mod tests {
         let armor = Armor::new(1, "test".to_string(), 1);
         let zone_entity = Entity::new(1, "test".to_string());
         let zone = Zone::new(zone_entity, 1, 1, Some(1), Some(1), Some(1), Some(1), Some(1));
-        let living_entity = LivingEntity::new(entity, 1, 1, 1, 1, 1, Some(weapon), Some(armor), zone.clone(), zone.clone());
+        let living_entity = LivingEntity::new(entity, 1, 1, 1, 1, 1, Some(weapon), Some(armor), Some(zone.clone()), zone.clone());
 
         let target_entity = Entity::new(2, "target".to_string());
         let target_weapon = Weapon::new(2, "target".to_string(), 1);
         let target_armor = Armor::new(2, "target".to_string(), 1);
         let target_zone_entity = Entity::new(1, "test".to_string());
         let target_zone = Zone::new(target_zone_entity, 1, 1, Some(1), Some(1), Some(1), Some(1), Some(1));
-        let mut target = LivingEntity::new(target_entity, 1, 1, 1, 1, 1, Some(target_weapon), Some(target_armor), target_zone.clone(), target_zone.clone());
+        let mut target = LivingEntity::new(target_entity, 1, 1, 1, 1, 1, Some(target_weapon), Some(target_armor), Some(target_zone.clone()), target_zone.clone());
 
         living_entity.attack(&mut target);
         assert_eq!(target.get_base_hp(), 0);
@@ -187,7 +187,7 @@ mod tests {
         let armor = Armor::new(1, "test".to_string(), 1);
         let zone_entity = Entity::new(1, "test".to_string());
         let zone = Zone::new(zone_entity, 1, 1, Some(1), Some(1), Some(1), Some(1), Some(1));
-        let mut living_entity = LivingEntity::new(entity, 1, 1, 1, 1, 1, Some(weapon), Some(armor), zone.clone(), zone.clone());
+        let mut living_entity = LivingEntity::new(entity, 1, 1, 1, 1, 1, Some(weapon), Some(armor), Some(zone.clone()), zone.clone());
         living_entity.take_damage(2);
         assert_eq!(living_entity.get_base_hp(), 0);
     }
@@ -199,7 +199,7 @@ mod tests {
         let armor = Armor::new(1, "test".to_string(), 1);
         let zone_entity = Entity::new(1, "test".to_string());
         let zone = Zone::new(zone_entity, 1, 1, Some(1), Some(1), Some(1), Some(1), Some(1));
-        let living_entity = LivingEntity::new(entity, 1, 1, 1, 1, 1, Some(weapon), Some(armor), zone.clone(), zone.clone());
+        let living_entity = LivingEntity::new(entity, 1, 1, 1, 1, 1, Some(weapon), Some(armor), Some(zone.clone()), zone.clone());
         assert_eq!(living_entity.is_alive(), true);
     } 
 }

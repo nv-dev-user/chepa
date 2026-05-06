@@ -206,7 +206,7 @@ pub fn load_weapons(content : &str) -> io::Result<Vec<Weapon>>{
     Ok(weapon_list)
 }
 
-pub fn load_npc(content : &str, zones: Vec<Zone>) -> io::Result<Vec<NPC>>{
+pub fn load_npc(content : &str, zones: &Vec<Zone>) -> io::Result<Vec<NPC>>{
 
     let result = JSONParser::new(content).parse();
 
@@ -241,7 +241,7 @@ pub fn load_npc(content : &str, zones: Vec<Zone>) -> io::Result<Vec<NPC>>{
             .clone();
 
         let entity = Entity::new(id, name);
-        let living_entity = LivingEntity::new(entity, base_hp, base_attack, base_speed, base_parade, base_xp, None, None, zone.clone(), zone);
+        let living_entity = LivingEntity::new(entity, base_hp, base_attack, base_speed, base_parade, base_xp, None, None, Some(zone.clone()), zone.clone());
 
         let dialogs: Vec<String> = npc_data["dialogs"]
             .as_array()
@@ -258,7 +258,7 @@ pub fn load_npc(content : &str, zones: Vec<Zone>) -> io::Result<Vec<NPC>>{
     Ok(npc_list)
 }
 
-pub fn load_player(content : &str, zones: Vec<Zone>) -> io::Result<Player>{
+pub fn load_player(content : &str, zones: &Vec<Zone>) -> io::Result<Player>{
     let result = JSONParser::new(content).parse();
 
     let player_obj = match result {
@@ -319,7 +319,7 @@ pub fn load_player(content : &str, zones: Vec<Zone>) -> io::Result<Player>{
         .clone();
 
     let entity = Entity::new(id, name);
-    let living_entity = LivingEntity::new(entity, base_hp, base_attack, base_speed, base_parade, base_xp, None, None, zone.clone(), zone);
+    let living_entity = LivingEntity::new(entity, base_hp, base_attack, base_speed, base_parade, base_xp, None, None, Some(zone.clone()), zone.clone());
 
     Ok(Player::new(living_entity, xp_total))
 }
@@ -514,7 +514,7 @@ mod tests {
         }
         "#;
 
-        let result = load_npc(content, zones.clone());
+        let result = load_npc(content, &zones);
         assert!(result.is_ok());
         let npcs = result.unwrap();
         assert_eq!(npcs.len(), 1);
@@ -549,7 +549,7 @@ mod tests {
         }
         "#;
 
-        let result = load_player(content, zones);
+        let result = load_player(content, &zones);
         assert!(result.is_ok());
         let player = result.unwrap();
         assert_eq!(player.get_living_entity().get_entity().get_id(), 1);
