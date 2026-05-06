@@ -3,7 +3,7 @@ use crate::services::{zone::search_zone_by_id, action};
 
 use crossterm::terminal;
 
-pub fn render(player: &LivingEntity, zones: &Vec<Zone>, actions: Vec<Box<dyn action::Action>>){
+pub fn render(player: &LivingEntity, zones: &Vec<Zone>, actions: &Vec<Box<dyn action::Action>>){
     let (cols, rows) = terminal::size().unwrap();
     let separation = "=".repeat(cols as usize);
     println!("{}\n\n", separation);
@@ -37,7 +37,7 @@ pub fn render_fight(){
     println!("\n{}", separation);
 }
 
-fn render_player_position(player: &LivingEntity, zones: &Vec<Zone>) {
+pub fn render_player_position(player: &LivingEntity, zones: &Vec<Zone>) {
     // Render around the zone
 
     // Find id and name of each neighbor zones
@@ -80,7 +80,7 @@ fn render_player_position(player: &LivingEntity, zones: &Vec<Zone>) {
     println!("{}{}", space_south, south_name);
 }
 
-fn render_possible_actions(actions: Vec<Box<dyn action::Action>>){
+fn render_possible_actions(actions: &Vec<Box<dyn action::Action>>){
     for (i, value) in actions.iter().enumerate() {
         println!("        {} : {}", i, value.get_description());
     }
@@ -137,7 +137,7 @@ mod tests {
             Box::new(action::AttackAction)
         ];
 
-        render(&player, &zones, actions);
+        render(&player, &zones, &actions);
         // Assertions ici
     }
 
@@ -155,7 +155,7 @@ mod tests {
             Box::new(action::AttackAction)
         ];
 
-        render_possible_actions(actions);
+        render_possible_actions(&actions);
         // Assertions ici
     }
 
@@ -185,7 +185,7 @@ mod tests {
             Zone::new(Entity::new(3, "Zone 2".to_string()), 1, 10, None, None, Some(1), None, None)
         );
 
-        render_possible_actions(actions);
+        render_possible_actions(&actions);
         // Assertions ici
     }
 }

@@ -4,6 +4,9 @@ use crate::models::armor::Armor;
 use crate::models::weapon::Weapon;
 use crate::models::zone::Zone;
 use crate::models::npc::NPC;
+use crate::models::player::Player;
+use crate::services::action::Action;
+use crate::services::renderer::render;
 
 mod services;
 mod models;
@@ -14,6 +17,7 @@ struct Game {
     zones: Vec<Zone>,
     armors: Vec<Armor>,
     npcs: Vec<NPC>,
+    player: Option<Player>
 }
 
 impl Game {
@@ -22,7 +26,8 @@ impl Game {
             weapons: Vec::new(),
             zones: Vec::new(),
             armors: Vec::new(),
-            npcs: Vec::new()
+            npcs: Vec::new(),
+            player: None
         }
     }
 
@@ -60,22 +65,39 @@ impl Game {
             Err(e) => eprintln!("Error loading npcs: {}", e),
         }
 
+        match jsonparser::receive_data_from_file("data/player.json") {
+            Ok(player_data) => match jsonparser::load_player(&player_data, &self.zones) {
+                Ok(player) => self.player = Some(player),
+                Err(e) => eprintln!("Error parsing player: {}", e),
+            },
+            Err(e) => eprintln!("Error loading player: {}", e),
+        }
+
         self
     }
 
     pub fn run(&mut self) {
         loop {
-            self.update();
-            self.render();
+            let actions = services::action::default_actions();
+            self.update(&actions);
+            self.render(&actions);
         }
     }
 
-    fn update(&mut self) {
-
+    fn update(&mut self, actions: &Vec<Box<dyn Action>>) {
+        match self.player {
+            Some(ref mut player) => services::input::handle_input(&mut player.get_mut_living_entity(), &actions),
+            None => eprintln!("Error: Player not found"),
+        }
+        // services::input::handle_input(&self.player.as_ref().unwrap().get_mut_living_entity(), &actions);
     }
 
-    fn render(&self) {
-
+    fn render(&self, actions: &Vec<Box<dyn Action>>) {
+        match self.player {
+            Some(ref player) => render(&player.get_living_entity(), &self.zones, &actions),
+            None => eprintln!("Error: Player not found"),
+        }
+        // render(&self.player.as_ref().unwrap().get_living_entity(), &self.zones, &actions);
     }
 }
 

@@ -13,7 +13,7 @@ fn clear_pending_input_events() {
     }
 }
 
-pub fn handle_input(lve: &mut LivingEntity, actions: &[Box<dyn Action>]) {
+pub fn handle_input(lve: &LivingEntity, actions: &[Box<dyn Action>]) {
     if let Ok(Event::Key(key_event)) = read() {
         if key_event.kind == KeyEventKind::Press {
             match key_event.code {

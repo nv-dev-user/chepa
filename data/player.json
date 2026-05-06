@@ -8,6 +8,6 @@
     "base_xp": 0,
     "weapon": {},
     "armor": {},
-    "zone": 1,
+    "zone_id": 1,
     "xp_total": 100
 }
