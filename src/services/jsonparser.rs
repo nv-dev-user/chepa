@@ -14,7 +14,7 @@ use crate::models::weapon::Weapon;
 use crate::models::zone::Zone;
 use crate::models::item::Item;
 use crate::models::living_entity::LivingEntity;
-use crate::services::zones::searchZoneById;
+use crate::services::zone::search_zone_by_id;
 use std::collections::HashMap;
 
 /*
@@ -236,7 +236,7 @@ pub fn load_npc(content : &str, zones: Vec<Zone>) -> io::Result<Vec<NPC>>{
         let base_parade = npc_data["base_parade"].as_f64().unwrap() as u32;
         let base_xp = npc_data["base_xp"].as_f64().unwrap() as u32;
 
-        let zone = searchZoneById(zone_id, &zones)
+        let zone = search_zone_by_id(zone_id, &zones)
             .ok_or_else(|| io::Error::new(io::ErrorKind::InvalidData, format!("Zone {} not found", zone_id)))?
             .clone();
 
@@ -314,7 +314,7 @@ pub fn load_player(content : &str, zones: Vec<Zone>) -> io::Result<Player>{
         .ok_or_else(|| io::Error::new(io::ErrorKind::InvalidData, "Missing or invalid xp_total"))?
         as u64;
 
-    let zone = searchZoneById(zone_id, &zones)
+    let zone = search_zone_by_id(zone_id, &zones)
         .ok_or_else(|| io::Error::new(io::ErrorKind::InvalidData, format!("Zone {} not found", zone_id)))?
         .clone();
 
