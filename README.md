@@ -39,6 +39,7 @@
 - Réalisation de services :
     - Rendu de déplacement
     - Jsonparser
+- Réalisation de la structure du jeu (setup/run(update/render))
 
 ### Thomas
 
