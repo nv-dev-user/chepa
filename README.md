@@ -41,8 +41,8 @@
 - Réalisation des controllers :
     - LivingEntityController
 - Réalisation de services :
-    - Rendu de déplacement
-    - Jsonparser
+    - Rendu de déplacement (commencé)
+    - Jsonparser (refonte complète)
 - Réalisation de la structure du jeu (setup/run(update/render))
 
 ### Thomas
@@ -74,9 +74,3 @@ Système de combat :
     - Render de déplacement
     - Render de Combat
     - Zone (ajout)
-
-### Les autres
-
-- M -> Metadata, JsonParser
-- N -> Zone, PNJ
-- T -> Item, Armor
