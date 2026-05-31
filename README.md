@@ -33,6 +33,7 @@
 - Logique de drop d'items
 - Logique des input actions
 - Implémentation des logiques de calculs (drop items, gain exp, etc...)
+- Gestion des probas de spawn + lancement d'un combat
 
 ### Nicolas
 - Réalisation des models :
@@ -44,6 +45,7 @@
     - Rendu de déplacement (commencé)
     - Jsonparser (refonte complète)
 - Réalisation de la structure du jeu (setup/run(update/render))
+- Déplacement du joueur
 
 ### Thomas
 
@@ -59,6 +61,10 @@ Système de combat :
     - LivingEntity
     - Player
     - NPC
+ 
+- Actions :
+      - Affichage
+      - Gestion
 
 - Services :
     - Zone
@@ -74,3 +80,5 @@ Système de combat :
     - Render de déplacement
     - Render de Combat
     - Zone (ajout)
+- Système de combat :
+      - relier interface
