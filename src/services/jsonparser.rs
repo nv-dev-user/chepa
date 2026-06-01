@@ -1,7 +1,6 @@
 
 use std::fs;
 use std::io;
-use std::path::PathBuf;
 
 use jsonparser::JSONParser;
 
@@ -16,36 +15,6 @@ use crate::models::item::Item;
 use crate::models::living_entity::LivingEntity;
 use crate::services::zone::search_zone_by_id;
 use std::collections::HashMap;
-
-/*
-* Recherche les fichiers de données dans le répertoire ./src/data
-* Retourne une liste de fichier JSON
-*/
-pub fn search_datafiles() -> std::io::Result<Vec<PathBuf>> {
-    let mut files = Vec::new();
-    for entry in fs::read_dir("./data")? {
-        let entry = entry?;
-        let path = entry.path();
-
-        if path.is_file() {
-            if let Some(ext) = path.extension() {
-                if ext == "json" {
-                    files.push(path);
-                }
-            }
-        }
-    }
-
-    if files.is_empty() {
-        return Err(std::io::Error::new(
-            std::io::ErrorKind::NotFound,
-            "Aucun fichier JSON trouvé",
-        ));
-    }
-    else {
-        Ok(files)
-    }
-}
 
 /*
  * Lit le contenu d'un fichier JSON et le retourne sous forme de String
@@ -94,7 +63,7 @@ pub fn load_zones(content : &str) -> io::Result<Vec<Zone>> {
         let south_zone_id = z["south_zone_id"].as_f64().map(|v| v as u32);
         let west_zone_id = z["west_zone_id"].as_f64().map(|v| v as u32);
 
-        zone_list.push(Zone::new(Entity::new(id, name), base_level, spawn_rate, spawn_group_id, north_zone_id, east_zone_id, south_zone_id, west_zone_id));
+        zone_list.push(Zone::new(Entity::new(id, name), base_level, spawn_rate, spawn_group_id, north_zone_id, south_zone_id, east_zone_id, west_zone_id));
     }
 
     Ok(zone_list)
@@ -327,18 +296,6 @@ pub fn load_player(content : &str, zones: &Vec<Zone>) -> io::Result<Player>{
 #[cfg(test)]
 mod tests {
     use super::*;
-
-    #[test]
-    fn test_search_datafiles() {
-        let result = search_datafiles();
-        assert!(result.is_ok());
-        let files = result.unwrap();
-        assert!(!files.is_empty());
-        for file in files {
-            println!("Fichier trouvé : {:?}", file);
-            assert!(file.extension().unwrap() == "json");
-        }
-    }
 
     #[test]
     fn test_receive_data_from_file() {

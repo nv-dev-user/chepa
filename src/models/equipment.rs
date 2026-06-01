@@ -1,6 +1,6 @@
 use super::item::Item;
 
-#[derive(Debug, serde::Deserialize)]
+#[derive(Debug, serde::Deserialize, Clone)]
 pub struct Equipment {
     item: Item,
     coef_modifier: u32,

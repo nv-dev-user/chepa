@@ -86,7 +86,7 @@ impl Game {
 
     fn update(&mut self, actions: &Vec<Box<dyn Action>>) {
         match self.player {
-            Some(ref mut player) => services::input::handle_input(&mut player.get_mut_living_entity(), &actions),
+            Some(ref mut player) => services::input::handle_input(&mut player.get_mut_living_entity(), &actions, &self.zones),
             None => eprintln!("Error: Player not found"),
         }
         // services::input::handle_input(&self.player.as_ref().unwrap().get_mut_living_entity(), &actions);
