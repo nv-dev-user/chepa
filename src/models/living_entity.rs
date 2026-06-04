@@ -84,20 +84,20 @@ impl LivingEntity {
         &self.come_from
     }
 
-    pub fn set_weapon(&mut self, weapon: Weapon) {
-        self.weapon = Some(weapon);
+    pub fn set_weapon(&mut self, weapon: &Weapon) {
+        self.weapon = Some(weapon.clone());
     }
 
-    pub fn set_armor(&mut self, armor: Armor) {
-        self.armor = Some(armor);
+    pub fn set_armor(&mut self, armor: &Armor) {
+        self.armor = Some(armor.clone());
     }
 
-    pub fn set_zone(&mut self, zone: Zone) {
-        self.zone = Some(zone);
+    pub fn set_zone(&mut self, zone: &Zone) {
+        self.zone = Some(zone.clone());
     }
 
-    pub fn set_come_from(&mut self, come_from: Zone) {
-        self.come_from = come_from;
+    pub fn set_come_from(&mut self, come_from: &Zone) {
+        self.come_from = come_from.clone();
     }
 }
 
