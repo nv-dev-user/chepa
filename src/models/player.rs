@@ -36,6 +36,10 @@ impl Player {
         self.xp_total = self.xp_total.saturating_add(gained_xp as u64);
     }
 
+    pub fn get_name(&self) -> &str {
+        self.living_entity.get_entity().get_name()
+    }
+
     pub fn get_level(&self) -> u32 {
         let mut level = 0_u32;
         loop {
@@ -62,25 +66,33 @@ impl Player {
         next_required.saturating_sub(self.xp_total)
     }
   
-    // TODO : mettre là où ça doit aller
-    pub fn fight(&mut self, target: &mut NPC) {
+    // Renvoie true si le player gagne, renvoie false si le npc gagne
+    pub fn fight(&mut self, target: &mut NPC) -> bool {
         while self.is_alive() && target.is_alive() {
+
+            // println!("Player.fight : va pour attaque du player -> target {} pv", target.get_living_entity().get_base_hp());
             self.attack(target.get_mut_living_entity());
+            // println!("Player.fight : vient d'attaque du player");
 
             if !target.is_alive() {
                 // TODO: add xp to player
                 // TODO: add items to player
-                break;
+                // println!("Player.fight : target est morte");
+                return true;
             }
 
+            // println!("Player.fight : va pour attaque du target -> player {} pv", self.get_living_entity().get_base_hp());
             target.attack(self.get_mut_living_entity());
+            // println!("Player.fight : vient d'attaque du target");
 
             if !self.is_alive() {
                 // TODO: remove items from player
                 // TODO: respawn
-                break;
+                // println!("Player.fight : player est mort");
+                return false;
             }
         }
+        false
     }
 }
 

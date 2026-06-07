@@ -77,18 +77,58 @@ impl Game {
         self
     }
 
+    pub fn get_player(&self) -> Option<&Player> {
+        self.player.as_ref()
+    }
+
+    pub fn get_player_mut(&mut self) -> Option<&mut Player> {
+        self.player.as_mut()
+    }
+
+    pub fn search_npc_by_id(&mut self, id: u32) -> Option<&mut NPC> {
+        for npc in &mut self.npcs {
+            if npc.get_living_entity().get_entity().get_id() == id {
+                return Some(npc)
+            }
+        }
+        None
+    }
+
+    pub fn attack_npc(&mut self, npc_id: u32){
+        let player = self.player.as_mut().unwrap();
+        let npc = self
+            .npcs
+            .iter_mut()
+            .find(|npc|
+                npc.get_living_entity()
+                   .get_entity()
+                   .get_id() == npc_id
+            );
+
+        if let Some(npc) = npc {
+            if player.fight(npc){
+                println!("Vous avez vaincu {} !", npc.get_living_entity().get_entity().get_name());
+            }
+            else {
+                println!("Vous avez été vaincu par {} !", npc.get_living_entity().get_entity().get_name());
+            }
+        }
+    }
+
     pub fn run(&mut self) {
         loop {
-            let actions = action::define_actions(&self.zones[0]);
+            let actions = action::define_actions(self);
             self.update(&actions);
             self.render(&actions);
         }
     }
 
     fn update(&mut self, actions: &Vec<Box<dyn action::Action>>) {
-        match self.player {
-            Some(ref mut player) => input::handle_input(&mut player.get_mut_living_entity(), &actions),
-            None => eprintln!("Error: Player not found"),
+        let has_player = self.player.is_some();
+
+        match has_player {
+            true => input::handle_input(self, &actions),
+            false => eprintln!("Error: Player not found"),
         }
         // services::input::handle_input(&self.player.as_ref().unwrap().get_mut_living_entity(), &actions);
     }

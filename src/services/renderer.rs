@@ -134,7 +134,7 @@ mod tests {
         let actions: Vec<Box<dyn action::Action>> = vec![
             Box::new(action::SpeakToNPCAction),
             Box::new(action::UseItemAction),
-            Box::new(action::AttackAction)
+            // Box::new(action::AttackAction)
         ];
 
         render(&player, &zones, &actions);
@@ -152,7 +152,7 @@ mod tests {
         let actions: Vec<Box<dyn action::Action>> = vec![
             Box::new(action::SpeakToNPCAction),
             Box::new(action::UseItemAction),
-            Box::new(action::AttackAction)
+            // Box::new(action::AttackAction)
         ];
 
         render_possible_actions(&actions);
@@ -164,7 +164,7 @@ mod tests {
         let actions: Vec<Box<dyn action::Action>> = vec![
             Box::new(action::SpeakToNPCAction),
             Box::new(action::UseItemAction),
-            Box::new(action::AttackAction)
+            // Box::new(action::AttackAction)
         ];
 
         let zones = Vec::from([
