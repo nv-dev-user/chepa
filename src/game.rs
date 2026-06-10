@@ -8,7 +8,6 @@ use crate::models::weapon::Weapon;
 use crate::models::zone::Zone;
 use crate::models::npc::NPC;
 use crate::models::player::Player;
-use crate::models::fight::Fight;
 
 
 pub struct Game {
@@ -16,8 +15,7 @@ pub struct Game {
     zones: Vec<Zone>,
     armors: Vec<Armor>,
     npcs: Vec<NPC>,
-    player: Option<Player>,
-    current_fight: Option<Fight>
+    player: Option<Player>
 }
 
 impl Game {
@@ -27,8 +25,7 @@ impl Game {
             zones: Vec::new(),
             armors: Vec::new(),
             npcs: Vec::new(),
-            player: None,
-            current_fight: None
+            player: None
         }
     }
 
