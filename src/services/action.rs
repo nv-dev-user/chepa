@@ -49,13 +49,13 @@ impl Action for AttackAction {
 //     ]
 // }
 
-pub fn get_actions<'a>(npcs: &'a mut Vec<NPC>) -> Vec<Box<dyn Action + 'a>> {
+pub fn get_actions<'a>(npcs: Vec<&'a mut NPC>) -> Vec<Box<dyn Action + 'a>> {
     let mut actions: Vec<Box<dyn Action + 'a>> = Vec::new();
     for npc in npcs.iter() {
-        actions.push(Box::new(AttackAction { npc: npc.clone() }));
+        actions.push(Box::new(AttackAction { npc: (*npc).clone() }));
     }
 
-    for npc in npcs.iter_mut() {
+    for npc in npcs {
         actions.push(Box::new(SpeakToNPCAction { npc }));
     }
     actions    

@@ -78,7 +78,7 @@ impl Game {
 
     pub fn run(&mut self) {
         loop {
-            let mut actions = services::action::get_actions(&mut self.npcs);
+            let mut actions = services::action::get_actions(services::npc::get_npc_by_zone(self.player.as_ref().unwrap().get_living_entity().get_zone(), &mut self.npcs));
             Self::update(&mut self.player, &self.zones, &mut actions);
             Self::render(&self.player, &self.zones, &actions);
         }
