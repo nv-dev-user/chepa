@@ -3,7 +3,7 @@ use crate::services::{zone::search_zone_by_id, action};
 
 use crossterm::terminal;
 
-pub fn render(player: &LivingEntity, zones: &Vec<Zone>, actions: &Vec<Box<dyn action::Action>>){
+pub fn render(player: &LivingEntity, zones: &Vec<Zone>, actions: &[Box<dyn action::Action + '_>]){
     let (cols, rows) = terminal::size().unwrap();
     let separation = "=".repeat(cols as usize);
     println!("{}\n\n", separation);
@@ -80,7 +80,7 @@ pub fn render_player_position(player: &LivingEntity, zones: &Vec<Zone>) {
     println!("{}{}", space_south, south_name);
 }
 
-fn render_possible_actions(actions: &Vec<Box<dyn action::Action>>){
+fn render_possible_actions(actions: &[Box<dyn action::Action + '_>]){
     for (i, value) in actions.iter().enumerate() {
         println!("        {} : {}", i, value.get_description());
     }
@@ -132,7 +132,6 @@ mod tests {
             Zone::new(Entity::new(3, "Zone 2".to_string()), 1, 10, None, None, Some(1), None, None)
         );
         let actions: Vec<Box<dyn action::Action>> = vec![
-            Box::new(action::SpeakToNPCAction),
             Box::new(action::UseItemAction),
             Box::new(action::AttackAction)
         ];
@@ -150,7 +149,6 @@ mod tests {
     #[test]
     fn test_render_possible_actions() {
         let actions: Vec<Box<dyn action::Action>> = vec![
-            Box::new(action::SpeakToNPCAction),
             Box::new(action::UseItemAction),
             Box::new(action::AttackAction)
         ];
@@ -162,7 +160,6 @@ mod tests {
     #[test]
     fn test_render() {
         let actions: Vec<Box<dyn action::Action>> = vec![
-            Box::new(action::SpeakToNPCAction),
             Box::new(action::UseItemAction),
             Box::new(action::AttackAction)
         ];

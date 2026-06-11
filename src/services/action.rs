@@ -1,43 +1,60 @@
+use crate::models::npc::NPC;
+
 pub trait Action {
     fn get_description(&self) -> String;
-    fn execute(&self);
+    fn execute(&mut self);
 }
 
-pub struct SpeakToNPCAction;
-pub struct AttackAction;
-pub struct UseItemAction;
+pub struct SpeakToNPCAction<'a> {
+    npc: &'a mut NPC,
+}
+pub struct AttackAction {
+    npc: NPC,
+}
 
-impl Action for SpeakToNPCAction {
+impl<'a> Action for SpeakToNPCAction<'a> {
     fn get_description(&self) -> String {
-        String::from("Speaking to the NPC")
+        format!("Parler à {}", self.npc.get_living_entity().get_entity().get_name())
     }
-    fn execute(&self) {
-        println!("Speaking to the NPC");
+    fn execute(&mut self) {
+        let name = self.npc.get_living_entity().get_entity().get_name();
+        let dialogs = self.npc.get_dialogs();
+        if !dialogs.is_empty() {
+            let idx = self.npc.get_dialog_index().min(dialogs.len() - 1);
+            println!("{} dit: {}", name, dialogs[idx]);
+            self.npc.set_dialog_index(idx + 1);
+        } else {
+            println!("{} n'a rien à dire.", name);
+        }
     }
 }
 
 impl Action for AttackAction {
     fn get_description(&self) -> String {
-        String::from("Attacking the target")
+        format!("Attaquer {}", self.npc.get_living_entity().get_entity().get_name())
     }
-    fn execute(&self) {
-        println!("Attacking the target");
-    }
-}
-
-impl Action for UseItemAction {
-    fn get_description(&self) -> String {
-        String::from("Using the item")
-    }
-    fn execute(&self) {
-        println!("Using the item");
+    fn execute(&mut self) {
+        println!("Attaquer {}", self.npc.get_living_entity().get_entity().get_name());
+        // TODO - Utiliser le système de combat opérationnel dev par Martin
     }
 }
 
-pub fn default_actions() -> Vec<Box<dyn Action>> {
-    vec![
-        Box::new(SpeakToNPCAction),
-        Box::new(AttackAction),
-        Box::new(UseItemAction),
-    ]
+// pub fn default_actions() -> Vec<Box<dyn Action>> {
+//     vec![
+//         Box::new(SpeakToNPCAction),
+//         Box::new(AttackAction),
+//         Box::new(UseItemAction),
+//     ]
+// }
+
+pub fn get_actions<'a>(npcs: &'a mut Vec<NPC>) -> Vec<Box<dyn Action + 'a>> {
+    let mut actions: Vec<Box<dyn Action + 'a>> = Vec::new();
+    for npc in npcs.iter() {
+        actions.push(Box::new(AttackAction { npc: npc.clone() }));
+    }
+
+    for npc in npcs.iter_mut() {
+        actions.push(Box::new(SpeakToNPCAction { npc }));
+    }
+    actions    
 }

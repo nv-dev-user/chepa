@@ -78,23 +78,24 @@ impl Game {
 
     pub fn run(&mut self) {
         loop {
-            let actions = services::action::default_actions();
-            self.update(&actions);
-            self.render(&actions);
+            // let actions = services::action::default_actions();
+            let mut actions = services::action::get_actions(&mut self.npcs);
+            Self::update(&mut self.player, &self.zones, &mut actions);
+            Self::render(&self.player, &self.zones, &actions);
         }
     }
 
-    fn update(&mut self, actions: &Vec<Box<dyn Action>>) {
-        match self.player {
-            Some(ref mut player) => services::input::handle_input(&mut player.get_mut_living_entity(), &actions, &self.zones),
+    fn update(player: &mut Option<Player>, zones: &Vec<Zone>, actions: &mut [Box<dyn Action + '_>]) {
+        match player {
+            Some(player) => services::input::handle_input(&mut player.get_mut_living_entity(), actions, zones),
             None => eprintln!("Error: Player not found"),
         }
         // services::input::handle_input(&self.player.as_ref().unwrap().get_mut_living_entity(), &actions);
     }
 
-    fn render(&self, actions: &Vec<Box<dyn Action>>) {
-        match self.player {
-            Some(ref player) => render(&player.get_living_entity(), &self.zones, &actions),
+    fn render(player: &Option<Player>, zones: &Vec<Zone>, actions: &[Box<dyn Action + '_>]) {
+        match player {
+            Some(player) => render(&player.get_living_entity(), zones, actions),
             None => eprintln!("Error: Player not found"),
         }
         // render(&self.player.as_ref().unwrap().get_living_entity(), &self.zones, &actions);
