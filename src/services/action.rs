@@ -16,6 +16,7 @@ impl<'a> Action for SpeakToNPCAction<'a> {
     fn get_description(&self) -> String {
         format!("Parler à {}", self.npc.get_living_entity().get_entity().get_name())
     }
+
     fn execute(&mut self) {
         let name = self.npc.get_living_entity().get_entity().get_name();
         let dialogs = self.npc.get_dialogs();
@@ -33,6 +34,7 @@ impl Action for AttackAction {
     fn get_description(&self) -> String {
         format!("Attaquer {}", self.npc.get_living_entity().get_entity().get_name())
     }
+    
     fn execute(&mut self) {
         println!("Attaquer {}", self.npc.get_living_entity().get_entity().get_name());
         // TODO - Utiliser le système de combat opérationnel dev par Martin

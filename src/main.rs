@@ -78,7 +78,6 @@ impl Game {
 
     pub fn run(&mut self) {
         loop {
-            // let actions = services::action::default_actions();
             let mut actions = services::action::get_actions(&mut self.npcs);
             Self::update(&mut self.player, &self.zones, &mut actions);
             Self::render(&self.player, &self.zones, &actions);
