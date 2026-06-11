@@ -1,6 +1,7 @@
 pub mod entity;
 pub mod item;
 pub mod zone;
+pub mod spawn_group;
 pub mod weapon;
 pub mod npc;
 pub mod armor;

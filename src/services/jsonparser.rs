@@ -13,6 +13,7 @@ use crate::models::weapon::Weapon;
 use crate::models::zone::Zone;
 use crate::models::item::Item;
 use crate::models::living_entity::LivingEntity;
+use crate::models::spawn_group::SpawnGroup;
 use crate::services::zone::search_zone_by_id;
 use std::collections::HashMap;
 
@@ -225,6 +226,48 @@ pub fn load_npc(content : &str, zones: &Vec<Zone>) -> io::Result<Vec<NPC>>{
     }
 
     Ok(npc_list)
+}
+
+pub fn load_spawn_groups(content: &str) -> io::Result<Vec<SpawnGroup>> {
+    let result = JSONParser::new(content).parse();
+
+    let spawn_groups_result = match result {
+        Ok(value) => value,
+        Err(e) => return Err(io::Error::new(io::ErrorKind::InvalidData, e.to_string())),
+    };
+
+    let spawn_groups_obj = spawn_groups_result
+        .as_object()
+        .ok_or_else(|| io::Error::new(io::ErrorKind::InvalidData, "Expected object"))?;
+
+    let spawn_groups_array = spawn_groups_obj
+        .get("spawn_groups")
+        .ok_or_else(|| io::Error::new(io::ErrorKind::InvalidData, "Missing spawn_groups key"))?
+        .as_array()
+        .ok_or_else(|| io::Error::new(io::ErrorKind::InvalidData, "Expected array"))?;
+
+    let mut spawn_group_list = Vec::new();
+
+    for spawn_group_data in spawn_groups_array {
+        let id = spawn_group_data["id"].as_f64().unwrap() as u32;
+
+        let npcs_obj = spawn_group_data["npcs"]
+            .as_object()
+            .ok_or_else(|| io::Error::new(io::ErrorKind::InvalidData, "Missing npcs object"))?;
+
+        let mut npcs = HashMap::new();
+        for (npc_id, weight) in npcs_obj.iter() {
+            let parsed_npc_id = npc_id
+                .parse::<u32>()
+                .map_err(|_| io::Error::new(io::ErrorKind::InvalidData, "Invalid npc id"))?;
+            let parsed_weight = weight.as_f64().unwrap() as f32;
+            npcs.insert(parsed_npc_id, parsed_weight);
+        }
+
+        spawn_group_list.push(SpawnGroup::new(id, npcs));
+    }
+
+    Ok(spawn_group_list)
 }
 
 pub fn load_player(content : &str, zones: &Vec<Zone>) -> io::Result<Player>{
@@ -481,6 +524,39 @@ mod tests {
         assert_eq!(npcs[0].get_living_entity().get_base_attack(), 18);
         assert_eq!(npcs[0].get_dialogs().len(), 2);
         assert_eq!(npcs[0].get_dialogs()[0], "Grrrr...");
+    }
+
+    #[test]
+    fn test_load_spawn_groups() {
+        let content = r#"
+        {
+            "spawn_groups": [
+                {
+                    "id": 1,
+                    "npcs": {
+                        "1": 0.2,
+                        "2": 0.7
+                    }
+                },
+                {
+                    "id": 2,
+                    "npcs": {
+                        "3": 1.0
+                    }
+                }
+            ]
+        }
+        "#;
+
+        let result = load_spawn_groups(content);
+        assert!(result.is_ok());
+        let spawn_groups = result.unwrap();
+        assert_eq!(spawn_groups.len(), 2);
+        assert_eq!(spawn_groups[0].get_id(), 1);
+        assert_eq!(spawn_groups[0].get_npcs().get(&1), Some(&0.2));
+        assert_eq!(spawn_groups[0].get_npcs().get(&2), Some(&0.7));
+        assert_eq!(spawn_groups[1].get_id(), 2);
+        assert_eq!(spawn_groups[1].get_npcs().get(&3), Some(&1.0));
     }
 
     #[test]
