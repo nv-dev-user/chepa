@@ -8,6 +8,7 @@ use crate::models::weapon::Weapon;
 use crate::models::zone::Zone;
 use crate::models::npc::NPC;
 use crate::models::player::Player;
+use crate::models::spawn_group::SpawnGroup;
 
 
 pub struct Game {
@@ -15,6 +16,7 @@ pub struct Game {
     zones: Vec<Zone>,
     armors: Vec<Armor>,
     npcs: Vec<NPC>,
+    spawn_groups: Vec<SpawnGroup>,
     player: Option<Player>
 }
 
@@ -25,6 +27,7 @@ impl Game {
             zones: Vec::new(),
             armors: Vec::new(),
             npcs: Vec::new(),
+            spawn_groups: Vec::new(),
             player: None
         }
     }
@@ -71,6 +74,14 @@ impl Game {
             Err(e) => eprintln!("Error loading player: {}", e),
         }
 
+        match jsonparser::receive_data_from_file("data/spawn-groups.json") {
+            Ok(spawn_groups_data) => match jsonparser::load_spawn_groups(&spawn_groups_data) {
+                Ok(spawn_groups) => self.spawn_groups = spawn_groups,
+                Err(e) => eprintln!("Error parsing player: {}", e),
+            },
+            Err(e) => eprintln!("Error loading player: {}", e),
+        }
+
         self
     }
 
@@ -78,12 +89,12 @@ impl Game {
         self.player.as_ref()
     }
 
-    pub fn get_zones(&self) -> &Vec<Zone> {
-        &self.zones
-    }
-
     pub fn get_player_mut(&mut self) -> Option<&mut Player> {
         self.player.as_mut()
+    }
+
+    pub fn get_zones(&self) -> &Vec<Zone> {
+        &self.zones
     }
 
     pub fn search_npc_by_id(&mut self, id: u32) -> Option<&mut NPC> {
@@ -93,6 +104,14 @@ impl Game {
             }
         }
         None
+    }
+
+    pub fn get_npcs(&self) -> &Vec<NPC> {
+        &self.npcs
+    }
+
+    pub fn get_spawn_groups(&self) -> &Vec<SpawnGroup> {
+        &self.spawn_groups
     }
 
     pub fn attack_npc(&mut self, npc_id: u32){
