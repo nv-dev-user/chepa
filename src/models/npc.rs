@@ -4,10 +4,11 @@ use super::item::Item;
 use std::collections::HashMap;
 use super::living_entity::LivingEntity;
 
-#[derive(Debug, serde::Deserialize)]
+#[derive(Debug, serde::Deserialize, Clone)]
 pub struct NPC {
     living_entity: LivingEntity,
     dialogs: Vec<String>,
+    dialog_index: usize,
     droppable_items_percentage : HashMap<Item, f32>,
 }
 
@@ -20,6 +21,7 @@ impl NPC {
         NPC {
             living_entity,
             dialogs,
+            dialog_index: 0,
             droppable_items_percentage }
     }
 
@@ -33,6 +35,16 @@ impl NPC {
 
     pub fn get_dialogs(&self) -> &Vec<String> {
         &self.dialogs
+    }
+
+    pub fn get_dialog_index(&self) -> usize {
+        self.dialog_index
+    }
+
+    pub fn set_dialog_index(&mut self, dialog_index: usize) {
+        if dialog_index < self.dialogs.len() {
+            self.dialog_index = dialog_index;
+        }
     }
 
     pub fn get_droppable_items_percentage(&self) -> &HashMap<Item, f32> {
