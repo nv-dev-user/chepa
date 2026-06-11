@@ -6,8 +6,8 @@
             "base_level": 2,
             "spawn_rate": 50,
             "spawn_group_id": 3,
-            "north_zone_id":3,
-            "south_zone_id":null,
+            "north_zone_id":null,
+            "south_zone_id":3,
             "east_zone_id":null,
             "west_zone_id":null
         },
@@ -17,8 +17,8 @@
             "base_level": 2,
             "spawn_rate": 25,
             "spawn_group_id": 2,
-            "north_zone_id":null,
-            "south_zone_id":3,
+            "north_zone_id":3,
+            "south_zone_id":null,
             "east_zone_id":null,
             "west_zone_id":null
         },

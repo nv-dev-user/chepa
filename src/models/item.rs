@@ -1,6 +1,6 @@
 use super::entity::Entity;
 
-#[derive(Debug, serde::Deserialize, PartialEq, Eq, Hash)]
+#[derive(Debug, serde::Deserialize, PartialEq, Eq, Hash, Clone)]
 pub struct Item {
     entity: Entity,
 }

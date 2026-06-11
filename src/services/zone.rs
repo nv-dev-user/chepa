@@ -8,7 +8,7 @@ pub enum Direction {
     Est,
 }
 
-pub fn change_living_entity_zone(lve: &LivingEntity, direction: Direction) {
+pub fn change_living_entity_zone(lve: &mut LivingEntity, direction: Direction, zones: Vec<Zone>) {
     let current_zone = lve.get_zone();
     match direction {
         Direction::Nord => {
@@ -16,8 +16,10 @@ pub fn change_living_entity_zone(lve: &LivingEntity, direction: Direction) {
                 Some(zone) => zone.get_north_zone_id(),
                 None => None
             } {
-                // let new_zone = Zone::get_zone(zone_id).expect("La zone n'a pas été trouvée");
-                // lve.set_current_zone(new_zone);
+                let new_zone = search_zone_by_id(zone_id, &zones).expect("La zone n'a pas été trouvée");
+                let come_from = current_zone.expect("La zone de provenance n'a pas été trouvée").clone();
+                lve.set_zone(new_zone);
+                lve.set_come_from(&come_from);
                 println!("{}", zone_id);
             } else {
                 println!("Il n'y a pas de zone au nord");
@@ -28,8 +30,10 @@ pub fn change_living_entity_zone(lve: &LivingEntity, direction: Direction) {
                 Some(zone) => zone.get_south_zone_id(),
                 None => None
             } {
-                // let new_zone = Zone::get_zone(zone_id).expect("La zone n'a pas été trouvée");
-                // lve.set_current_zone(new_zone);
+                let new_zone = search_zone_by_id(zone_id, &zones).expect("La zone n'a pas été trouvée");
+                let come_from = current_zone.expect("La zone de provenance n'a pas été trouvée").clone();
+                lve.set_zone(new_zone);
+                lve.set_come_from(&come_from);
                 println!("{}", zone_id);
             } else {
                 println!("Il n'y a pas de zone au sud");
@@ -40,8 +44,10 @@ pub fn change_living_entity_zone(lve: &LivingEntity, direction: Direction) {
                 Some(zone) => zone.get_west_zone_id(),
                 None => None
             } {
-                // let new_zone = Zone::get_zone(zone_id).expect("La zone n'a pas été trouvée");
-                // lve.set_current_zone(new_zone);
+                let new_zone = search_zone_by_id(zone_id, &zones).expect("La zone n'a pas été trouvée");
+                let come_from = current_zone.expect("La zone de provenance n'a pas été trouvée").clone();
+                lve.set_zone(new_zone);
+                lve.set_come_from(&come_from);
                 println!("{}", zone_id);
             } else {
                 println!("Il n'y a pas de zone à l'ouest");
@@ -52,8 +58,10 @@ pub fn change_living_entity_zone(lve: &LivingEntity, direction: Direction) {
                 Some(zone) => zone.get_east_zone_id(),
                 None => None
             } {
-                // let new_zone = Zone::get_zone(zone_id).expect("La zone n'a pas été trouvée");
-                // lve.set_current_zone(new_zone);
+                let new_zone = search_zone_by_id(zone_id, &zones).expect("La zone n'a pas été trouvée");
+                let come_from = current_zone.expect("La zone de provenance n'a pas été trouvée").clone();
+                lve.set_zone(new_zone);
+                lve.set_come_from(&come_from);
                 println!("{}", zone_id);
             } else {
                 println!("Il n'y a pas de zone à l'est");

@@ -78,6 +78,10 @@ impl Game {
         self.player.as_ref()
     }
 
+    pub fn get_zones(&self) -> &Vec<Zone> {
+        &self.zones
+    }
+
     pub fn get_player_mut(&mut self) -> Option<&mut Player> {
         self.player.as_mut()
     }
@@ -122,7 +126,6 @@ impl Game {
 
     fn update(&mut self, actions: &Vec<Box<dyn action::Action>>) {
         let has_player = self.player.is_some();
-
         match has_player {
             true => input::handle_input(self, &actions),
             false => eprintln!("Error: Player not found"),
