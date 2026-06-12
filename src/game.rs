@@ -1,7 +1,8 @@
 use crate::services::jsonparser;
 use crate::services::action;
 use crate::services::input;
-use crate::services::renderer::render;
+use crate::services::renderer;
+use crate::services::npc;
 
 use crate::models::armor::Armor;
 use crate::models::weapon::Weapon;
@@ -114,6 +115,19 @@ impl Game {
         &self.spawn_groups
     }
 
+    pub fn speak_with_npc(&mut self, id: u32){
+        let npc = self.search_npc_by_id(id).unwrap();
+        let name = npc.get_living_entity().get_entity().get_name();
+        let dialogs = npc.get_dialogs();
+        if !dialogs.is_empty() {
+            let idx = npc.get_dialog_index().min(dialogs.len() - 1);
+            println!("{} dit: {}", name, dialogs[idx]);
+            npc.set_dialog_index(idx + 1);
+        } else {
+            println!("{} n'a rien à dire.", name);
+        }
+    }
+
     pub fn attack_npc(&mut self, npc_id: u32){
         let player = self.player.as_mut().unwrap();
         let npc = self
@@ -137,8 +151,19 @@ impl Game {
 
     pub fn run(&mut self) {
         loop {
-            let actions = action::define_actions(self);
+            let actions = action::get_actions(
+                npc::get_npc_by_zone(
+                    self.player.as_ref().unwrap().get_living_entity().get_zone(), 
+                    &mut self.npcs
+                )
+            );
             self.update(&actions);
+            let actions = action::get_actions(
+                npc::get_npc_by_zone(
+                    self.player.as_ref().unwrap().get_living_entity().get_zone(), 
+                    &mut self.npcs
+                )
+            );
             self.render(&actions);
         }
     }
@@ -149,14 +174,12 @@ impl Game {
             true => input::handle_input(self, &actions),
             false => eprintln!("Error: Player not found"),
         }
-        // services::input::handle_input(&self.player.as_ref().unwrap().get_mut_living_entity(), &actions);
     }
 
     fn render(&self, actions: &Vec<Box<dyn action::Action>>) {
         match self.player {
-            Some(ref player) => render(&player.get_living_entity(), &self.zones, &actions),
+            Some(ref player) => renderer::render(&player.get_living_entity(), &self.zones, &actions),
             None => eprintln!("Error: Player not found"),
         }
-        // render(&self.player.as_ref().unwrap().get_living_entity(), &self.zones, &actions);
     }
 }
