@@ -30,6 +30,12 @@ impl<'a> Action for SpeakToNPCAction<'a> {
     }
 }
 
+impl AttackAction {
+    pub fn new(npc: NPC) -> Self {
+        AttackAction { npc }
+    }
+}
+
 impl Action for AttackAction {
     fn get_description(&self) -> String {
         format!("Attaquer {}", self.npc.get_living_entity().get_entity().get_name())
@@ -40,14 +46,6 @@ impl Action for AttackAction {
         // TODO - Utiliser le système de combat opérationnel dev par Martin
     }
 }
-
-// pub fn default_actions() -> Vec<Box<dyn Action>> {
-//     vec![
-//         Box::new(SpeakToNPCAction),
-//         Box::new(AttackAction),
-//         Box::new(UseItemAction),
-//     ]
-// }
 
 pub fn get_actions<'a>(npcs: Vec<&'a mut NPC>) -> Vec<Box<dyn Action + 'a>> {
     let mut actions: Vec<Box<dyn Action + 'a>> = Vec::new();
