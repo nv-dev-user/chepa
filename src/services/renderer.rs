@@ -1,5 +1,7 @@
-use crate::models::{living_entity::LivingEntity, zone::Zone};
+use crate::models::{living_entity::LivingEntity, zone::Zone, item::Item};
+use crate::models::npc::NPC;
 use crate::services::{zone::search_zone_by_id, action};
+use std::collections::HashMap;
 
 use crossterm::terminal;
 
@@ -119,11 +121,6 @@ mod tests {
             Zone::new(Entity::new(2, "Zone 2".to_string()), 1, 10, None, None, Some(1), None, None),
             Zone::new(Entity::new(3, "Zone 3".to_string()), 1, 10, None, None, None, Some(4), None),
             Zone::new(Entity::new(4, "Zone 4".to_string()), 1, 10, None, None, None, None, Some(3))
-
-            // Zone::new(Entity::new(1, "Zone 1".to_string()), 1, 10, None, Some(2), Some(1), Some(4), Some(3)),
-            // Zone::new(Entity::new(2, "Zone 2".to_string()), 1, 10, None, Some(2), Some(1), Some(4), Some(3)),
-            // Zone::new(Entity::new(3, "Zone 3".to_string()), 1, 10, None, Some(2), Some(1), Some(4), Some(3)),
-            // Zone::new(Entity::new(4, "Zone 4".to_string()), 1, 10, None, Some(2), Some(1), Some(4), Some(3))
         ]);
         let player = LivingEntity::new(
             Entity::new(1, "Player".to_string()),
@@ -131,37 +128,61 @@ mod tests {
             Some(Zone::new(Entity::new(1, "Zone 1".to_string()), 1, 10, None, Some(2), Some(1), Some(4), Some(3))),
             Zone::new(Entity::new(3, "Zone 2".to_string()), 1, 10, None, None, Some(1), None, None)
         );
+        let npc = NPC::new(
+            LivingEntity::new(
+                Entity::new(2, "Npc".to_string()),
+                100, 10, 5, 5, 0, None, None,
+                Some(Zone::new(Entity::new(1, "Zone 1".to_string()), 1, 10, None, Some(2), Some(1), Some(4), Some(3))),
+                Zone::new(Entity::new(3, "Zone 2".to_string()), 1, 10, None, None, Some(1), None, None)
+            ),
+            Vec::new(),
+            HashMap::new()
+        );
         let actions: Vec<Box<dyn action::Action>> = vec![
-            Box::new(action::UseItemAction),
-            Box::new(action::AttackAction)
+            Box::new(action::AttackAction::new(npc.clone()))
         ];
 
         render(&player, &zones, &actions);
-        // Assertions ici
     }
 
     #[test]
     fn test_render_fight() {
         render_fight();
-        // Assertions ici
     }
 
     #[test]
     fn test_render_possible_actions() {
+        let npc = NPC::new(
+            LivingEntity::new(
+                Entity::new(2, "Npc".to_string()),
+                100, 10, 5, 5, 0, None, None,
+                Some(Zone::new(Entity::new(1, "Zone 1".to_string()), 1, 10, None, Some(2), Some(1), Some(4), Some(3))),
+                Zone::new(Entity::new(3, "Zone 2".to_string()), 1, 10, None, None, Some(1), None, None)
+            ),
+            Vec::new(),
+            HashMap::new()
+        );
         let actions: Vec<Box<dyn action::Action>> = vec![
-            Box::new(action::UseItemAction),
-            Box::new(action::AttackAction)
+            Box::new(action::AttackAction::new(npc.clone()))
         ];
 
         render_possible_actions(&actions);
-        // Assertions ici
     }
 
     #[test]
     fn test_render() {
+        let npc = NPC::new(
+            LivingEntity::new(
+                Entity::new(2, "Npc".to_string()),
+                100, 10, 5, 5, 0, None, None,
+                Some(Zone::new(Entity::new(1, "Zone 1".to_string()), 1, 10, None, Some(2), Some(1), Some(4), Some(3))),
+                Zone::new(Entity::new(3, "Zone 2".to_string()), 1, 10, None, None, Some(1), None, None)
+            ),
+            Vec::new(),
+            HashMap::new()
+        );
         let actions: Vec<Box<dyn action::Action>> = vec![
-            Box::new(action::UseItemAction),
-            Box::new(action::AttackAction)
+            Box::new(action::AttackAction::new(npc.clone()))
         ];
 
         let zones = Vec::from([
@@ -169,11 +190,6 @@ mod tests {
             Zone::new(Entity::new(2, "Zone 2".to_string()), 1, 10, None, None, Some(1), None, None),
             Zone::new(Entity::new(3, "Zone 3".to_string()), 1, 10, None, None, None, Some(4), None),
             Zone::new(Entity::new(4, "Zone 4".to_string()), 1, 10, None, None, None, None, Some(3))
-
-            // Zone::new(Entity::new(1, "Zone 1".to_string()), 1, 10, None, Some(2), Some(1), Some(4), Some(3)),
-            // Zone::new(Entity::new(2, "Zone 2".to_string()), 1, 10, None, Some(2), Some(1), Some(4), Some(3)),
-            // Zone::new(Entity::new(3, "Zone 3".to_string()), 1, 10, None, Some(2), Some(1), Some(4), Some(3)),
-            // Zone::new(Entity::new(4, "Zone 4".to_string()), 1, 10, None, Some(2), Some(1), Some(4), Some(3))
         ]);
         let player = LivingEntity::new(
             Entity::new(1, "Player".to_string()),
@@ -183,6 +199,5 @@ mod tests {
         );
 
         render_possible_actions(&actions);
-        // Assertions ici
     }
 }
