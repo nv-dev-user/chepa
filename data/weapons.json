@@ -1,0 +1,34 @@
+{
+  "weapons": [
+    {
+      "id": 1,
+      "name": "Dague en fer",
+      "coef_modifier": 8
+    },
+    {
+      "id": 2,
+      "name": "Epee courte",
+      "coef_modifier": 12
+    },
+    {
+      "id": 3,
+      "name": "Hache de milice",
+      "coef_modifier": 16
+    },
+    {
+      "id": 4,
+      "name": "Lance de garde",
+      "coef_modifier": 20
+    },
+    {
+      "id": 5,
+      "name": "Marteau de guerre",
+      "coef_modifier": 25
+    },
+    {
+      "id": 6,
+      "name": "Lame runique",
+      "coef_modifier": 31
+    }
+  ]
+}

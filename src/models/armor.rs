@@ -1,24 +1,28 @@
-use super::entity::Entity;
+use super::equipment::Equipment;
 
+#[derive(Debug, serde::Deserialize, Clone)]
 pub struct Armor {
-    entity: Entity,
-    coef_def: u32,
+    equipment: Equipment,
 }
 
 impl Armor {
-    pub fn new(entity: Entity, coef_def: u32) -> Self {
-        Armor { entity, coef_def }
+    pub fn new(id: u32, name: String, coef_modifier: u32) -> Self {
+        Armor { equipment: Equipment::new(id, name, coef_modifier) }
+    }
+
+    pub fn new_from_equipment(equipment: Equipment) -> Self {
+        Armor { equipment }
     }
 
     pub fn get_id(&self) -> u32 {
-        self.entity.get_id()
+        self.equipment.get_id()
     }
 
     pub fn get_name(&self) -> &str {
-        self.entity.get_name()
+        self.equipment.get_name()
     }
 
-    pub fn get_coef_def(&self) -> u32 {
-        self.coef_def
+    pub fn get_coef_modifier(&self) -> u32 {
+        self.equipment.get_coef_modifier()
     }
 }

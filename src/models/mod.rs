@@ -1,10 +1,11 @@
 pub mod entity;
 pub mod item;
 pub mod zone;
-pub mod directions;
+pub mod spawn_group;
 pub mod weapon;
-pub mod mob;
-pub mod pnj;
+pub mod npc;
 pub mod armor;
 pub mod player;
 pub mod metadata;
+pub mod living_entity;
+pub mod equipment;

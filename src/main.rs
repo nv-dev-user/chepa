@@ -1,3 +1,9 @@
+mod game;
+mod models;
+mod services;
+
+use game::Game;
+
 fn main() {
-    println!("Hello, world!");
+    Game::new().setup().run();
 }
