@@ -31,6 +31,12 @@ impl AttackAction {
     }
 }
 
+impl AttackAction {
+    pub fn new(npc: NPC) -> Self {
+        AttackAction { npc }
+    }
+}
+
 impl Action for AttackAction {
     fn get_description(&self) -> String {
         format!("Attaquer {}", self.name_npc)
@@ -40,17 +46,8 @@ impl Action for AttackAction {
     }
 }
 
-// impl Action for UseItemAction {
-//     fn get_description(&self) -> String {
-//         String::from("Using the item")
-//     }
-//     fn execute(&self, game: &mut Game) {
-//         println!("Using the item");
-//     }
-// }
-
-pub fn get_actions(npcs: Vec<& mut NPC>) -> Vec<Box<dyn Action>> {
-    let mut actions: Vec<Box<dyn Action>> = Vec::new();
+pub fn get_actions<'a>(npcs: Vec<&'a mut NPC>) -> Vec<Box<dyn Action + 'a>> {
+    let mut actions: Vec<Box<dyn Action + 'a>> = Vec::new();
     for npc in npcs.iter() {
         actions.push(Box::new(AttackAction { 
             id_npc: (*npc).get_living_entity().get_entity().get_id(), 
