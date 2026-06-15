@@ -127,7 +127,13 @@ impl LivingEntityCombat for LivingEntity {
             damage
         };
 
-        self.base_hp -= damage;
+        //Attention, base_hp est un entier non signé, il ne peut pas passer en dessous de 01
+        if self.base_hp < damage {
+            self.base_hp = 0;   
+        }
+        else{
+            self.base_hp -= damage;
+        }
     }
 
     fn is_alive(&self) -> bool {
