@@ -9,6 +9,7 @@
 - Armor
 - PNJ
 - Metadata
+- Player
 
 ## SERVICES
 
